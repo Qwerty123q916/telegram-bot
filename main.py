@@ -16,7 +16,7 @@ regions = [
 
 region_photos = {
     "Toshkent": [
-        "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
+        "TOSHKENT_1_FILE_ID",
         "TOSHKENT_2_FILE_ID",
         "TOSHKENT_3_FILE_ID",
     ],
@@ -79,85 +79,81 @@ region_photos = {
 
 region_texts = {
     "Toshkent": {
-        "1": "✨ Toshkent uchun Шахарни энг тоза ва ишончли салондаридан бири
+        "1": """Шахардаги ишончли ва қулай хизматлардан бири.
 
-ФОТО 100% РЕАЛ!!!
-     
-Массаж нархлари: 800.000-1.800.000 сум
+ФОТОЛАР РЕАЛ
 
-1)Классический 
-2)Релакс
-3)Оздоровительный 
-4)Спортивный 
-5)Микс 2/1
-6)Микс 3/1
-7)Микс 4/1 
-8)Общий 
-10)Универсальный 
-11)Королевский 2 та киз бн😍
+Хизмат турлари:
+1) Классик
+2) Релакс
+3) Соғломлаштирувчи
+4) Спорт
+5) Микс 2/1
+6) Микс 3/1
+7) Микс 4/1
+8) Умумий
+9) Универсал
 
-Язык: Русский, турецкий, казахискый
+Тиллар: Русский, туркча, қозоқча
 
-Танловда адашманг! 
-
-Ёш гозал кизларни ишга оламиз ёш чегараси 18-30.",
-        "2": "✨ Toshkent uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Toshkent uchun 3-matningiz shu yerga yoziladi.",
+Тўғри танлов қилинг!""",
+        "2": "Бу ерга Тошкент учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Тошкент учун 3-вариант матнини ёзинг",
     },
     "Samarqand": {
-        "1": "✨ Samarqand uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Samarqand uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Samarqand uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Самарқанд учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Самарқанд учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Самарқанд учун 3-вариант матнини ёзинг",
     },
     "Buxoro": {
-        "1": "✨ Buxoro uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Buxoro uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Buxoro uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Бухоро учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Бухоро учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Бухоро учун 3-вариант матнини ёзинг",
     },
     "Farg‘ona": {
-        "1": "✨ Farg‘ona uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Farg‘ona uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Farg‘ona uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Фарғона учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Фарғона uchun 2-вариант матнини ёзинг",
+        "3": "Бу ерга Фарғона учун 3-вариант матнини ёзинг",
     },
     "Andijon": {
-        "1": "✨ Andijon uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Andijon uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Andijon uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Андижон учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Андижон учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Андижон учун 3-вариант матнини ёзинг",
     },
     "Namangan": {
-        "1": "✨ Namangan uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Namangan uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Namangan uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Наманган учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Наманган учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Наманган учун 3-вариант матнини ёзинг",
     },
     "Qashqadaryo": {
-        "1": "✨ Qashqadaryo uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Qashqadaryo uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Qashqadaryo uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Қашқадарё учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Қашқадарё учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Қашқадарё учун 3-вариант матнини ёзинг",
     },
     "Surxondaryo": {
-        "1": "✨ Surxondaryo uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Surxondaryo uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Surxondaryo uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Сурхондарё учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Сурхондарё учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Сурхондарё учун 3-вариант матнини ёзинг",
     },
     "Navoiy": {
-        "1": "✨ Navoiy uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Navoiy uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Navoiy uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Навоий учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Навоий учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Навоий учун 3-вариант матнини ёзинг",
     },
     "Sirdaryo": {
-        "1": "✨ Sirdaryo uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Sirdaryo uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Sirdaryo uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Сирдарё учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Сирдарё учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Сирдарё учун 3-вариант матнини ёзинг",
     },
     "Jizzax": {
-        "1": "✨ Jizzax uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Jizzax uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Jizzax uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Жиззах учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Жиззах учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Жиззах учун 3-вариант матнини ёзинг",
     },
     "Xorazm": {
-        "1": "✨ Xorazm uchun 1-matningiz shu yerga yoziladi.",
-        "2": "✨ Xorazm uchun 2-matningiz shu yerga yoziladi.",
-        "3": "✨ Xorazm uchun 3-matningiz shu yerga yoziladi.",
+        "1": "Бу ерга Хоразм учун 1-вариант матнини ёзинг",
+        "2": "Бу ерга Хоразм учун 2-вариант матнини ёзинг",
+        "3": "Бу ерга Хоразм учун 3-вариант матнини ёзинг",
     },
 }
 
@@ -191,43 +187,38 @@ async def get_photo_id(message: Message):
 
 @dp.message(F.text == "/start")
 async def start_handler(message: Message):
-    welcome_text = (
-        "🌟 Assalomu alaykum!\n\n"
-        "📍 Kerakli viloyatni tanlang.\n"
-        "🖼 Sizga rasmlar va variantlar ko‘rsatiladi."
+    await message.answer(
+        "🌟 Ассалому алайкум!\n\n📍 Вилоятни танланг:",
+        reply_markup=region_keyboard()
     )
-    await message.answer(welcome_text, reply_markup=region_keyboard())
 
 @dp.message(F.text.in_(regions))
 async def region_handler(message: Message):
     region = message.text
     user_region[message.from_user.id] = region
 
-    title_text = f"📍 {region}\n\n🖼 Quyidagi variantlar bilan tanishing:"
-    await message.answer(title_text)
-
     photos = region_photos.get(region, [])
     texts = region_texts.get(region, {})
 
     if photos:
         for i, photo in enumerate(photos, start=1):
-            caption_text = texts.get(str(i), f"{region} uchun {i}-variant")
+            caption_text = texts.get(str(i), f"{region} учун {i}-вариант")
             await message.answer_photo(
                 photo=photo,
                 caption=caption_text
             )
     else:
-        await message.answer(f"⚠️ {region} uchun rasm hali qo‘shilmagan.")
+        await message.answer(f"{region} учун расм ҳали қўшилмаган.")
 
     await message.answer(
-        "👇 Kerakli variantni tanlang:",
+        "👇 Керакли вариантни танланг:",
         reply_markup=variant_keyboard()
     )
 
 @dp.message(F.text == "⬅️ Orqaga")
 async def back_handler(message: Message):
     await message.answer(
-        "📍 Viloyatni tanlang:",
+        "📍 Вилоятни танланг:",
         reply_markup=region_keyboard()
     )
 
@@ -237,7 +228,7 @@ async def variant_handler(message: Message):
 
     if not region:
         await message.answer(
-            "❗ Avval viloyatni tanlang.",
+            "❗ Аввал вилоятни танланг.",
             reply_markup=region_keyboard()
         )
         return
@@ -249,15 +240,9 @@ async def variant_handler(message: Message):
     }
 
     selected_variant = variant_map[message.text]
-    text = region_texts.get(region, {}).get(selected_variant, "Matn topilmadi.")
+    text = region_texts.get(region, {}).get(selected_variant, "Матн топилмади.")
 
-    final_text = (
-        f"✅ Tanlangan viloyat: {region}\n"
-        f"✅ Tanlangan variant: {selected_variant}\n\n"
-        f"{text}"
-    )
-
-    await message.answer(final_text, reply_markup=variant_keyboard())
+    await message.answer(text, reply_markup=variant_keyboard())
 
 async def main():
     await dp.start_polling(bot)
