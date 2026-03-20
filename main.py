@@ -28,16 +28,25 @@ async def region_handler(callback: CallbackQuery):
     index = int(callback.data.split("_")[1])
     region = regions[index]
 
+    photos = [
+        "https://picsum.photos/600/400",
+        "https://picsum.photos/600/401",
+        "https://picsum.photos/600/402"
+    ]
+
+    for i, photo in enumerate(photos, start=1):
+        await callback.message.answer_photo(
+            photo=photo,
+            caption=f"{region} uchun {i}-variant rasmi"
+        )
+
     builder = InlineKeyboardBuilder()
     builder.button(text="1", callback_data=f"text_{index}_1")
     builder.button(text="2", callback_data=f"text_{index}_2")
     builder.button(text="3", callback_data=f"text_{index}_3")
     builder.adjust(3)
 
-    await callback.message.answer(
-        f"{region} tanlandi. Variantni tanlang:",
-        reply_markup=builder.as_markup()
-    )
+    await callback.message.answer(f"{region} tanlandi. Variantni tanlang:", reply_markup=builder.as_markup())
     await callback.answer()
 
 @dp.callback_query(F.data.startswith("text_"))
