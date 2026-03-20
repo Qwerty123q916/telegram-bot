@@ -39,7 +39,9 @@ async def region_handler(callback: CallbackQuery):
             photo=photo,
             caption=f"{region} uchun {i}-variant rasmi"
         )
-
+@dp.message(F.photo)
+async def get_photo_id(message: Message):
+    await message.answer(message.photo[-1].file_id)
     builder = InlineKeyboardBuilder()
     builder.button(text="1", callback_data=f"text_{index}_1")
     builder.button(text="2", callback_data=f"text_{index}_2")
