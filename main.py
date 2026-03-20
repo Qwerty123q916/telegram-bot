@@ -17,7 +17,7 @@ regions = [
 
 region_photos = {
     "Toshkent": [
-        ("TOSHKENT_1_FILE_ID", "1-variant"),
+        ("AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA", "1-variant"),
         ("TOSHKENT_2_FILE_ID", "2-variant"),
         ("TOSHKENT_3_FILE_ID", "3-variant"),
     ],
