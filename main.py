@@ -1,251 +1,208 @@
-import asyncio
-import os
-from aiogram import Bot, Dispatcher, F
-from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
+import telebot
+from telebot import types
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = "TOKENINGIZNI_BU_YERGA_QOYING"
+bot = telebot.TeleBot(TOKEN)
 
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
+# User state saqlash
+user_state = {}
 
-regions = [
-    "Toshkent", "Samarqand", "Buxoro", "Farg‘ona",
-    "Andijon", "Namangan", "Qashqadaryo", "Surxondaryo",
-    "Navoiy", "Sirdaryo", "Jizzax", "Xorazm"
-]
-
-region_photos = {
-    "Toshkent": [
-        "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
-        "TOSHKENT_2_FILE_ID",
-        "TOSHKENT_3_FILE_ID",
-    ],
-    "Samarqand": [
-        "SAMARQAND_1_FILE_ID",
-        "SAMARQAND_2_FILE_ID",
-        "SAMARQAND_3_FILE_ID",
-    ],
-    "Buxoro": [
-        "BUXORO_1_FILE_ID",
-        "BUXORO_2_FILE_ID",
-        "BUXORO_3_FILE_ID",
-    ],
-    "Farg‘ona": [
-        "FARGONA_1_FILE_ID",
-        "FARGONA_2_FILE_ID",
-        "FARGONA_3_FILE_ID",
-    ],
-    "Andijon": [
-        "ANDIJON_1_FILE_ID",
-        "ANDIJON_2_FILE_ID",
-        "ANDIJON_3_FILE_ID",
-    ],
-    "Namangan": [
-        "NAMANGAN_1_FILE_ID",
-        "NAMANGAN_2_FILE_ID",
-        "NAMANGAN_3_FILE_ID",
-    ],
-    "Qashqadaryo": [
-        "QASHQADARYO_1_FILE_ID",
-        "QASHQADARYO_2_FILE_ID",
-        "QASHQADARYO_3_FILE_ID",
-    ],
-    "Surxondaryo": [
-        "SURXONDARYO_1_FILE_ID",
-        "SURXONDARYO_2_FILE_ID",
-        "SURXONDARYO_3_FILE_ID",
-    ],
-    "Navoiy": [
-        "NAVOIY_1_FILE_ID",
-        "NAVOIY_2_FILE_ID",
-        "NAVOIY_3_FILE_ID",
-    ],
-    "Sirdaryo": [
-        "SIRDARYO_1_FILE_ID",
-        "SIRDARYO_2_FILE_ID",
-        "SIRDARYO_3_FILE_ID",
-    ],
-    "Jizzax": [
-        "JIZZAX_1_FILE_ID",
-        "JIZZAX_2_FILE_ID",
-        "JIZZAX_3_FILE_ID",
-    ],
-    "Xorazm": [
-        "XORAZM_1_FILE_ID",
-        "XORAZM_2_FILE_ID",
-        "XORAZM_3_FILE_ID",
-    ],
-}
-
-region_texts = {
-    "Toshkent": {
-        "1": """Шахардаги ишончли ва қулай хизматлардан бири.
-
-ФОТОЛАР РЕАЛ
-
-Хизмат турлари:
-1) Классик
-2) Релакс
-3) Соғломлаштирувчи
-4) Спорт
-5) Микс 2/1
-6) Микс 3/1
-7) Микс 4/1
-8) Умумий
-9) Универсал
-
-Тиллар: Русский, туркча, қозоқча
-
-Тўғри танлов қилинг!""",
-        "2": "Бу ерга Тошкент учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Тошкент учун 3-вариант матнини ёзинг",
-    },
-    "Samarqand": {
-        "1": "Бу ерга Самарқанд учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Самарқанд учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Самарқанд учун 3-вариант матнини ёзинг",
-    },
-    "Buxoro": {
-        "1": "Бу ерга Бухоро учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Бухоро учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Бухоро учун 3-вариант матнини ёзинг",
-    },
-    "Farg‘ona": {
-        "1": "Бу ерга Фарғона учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Фарғона учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Фарғона учун 3-вариант матнини ёзинг",
-    },
-    "Andijon": {
-        "1": "Бу ерга Андижон учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Андижон учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Андижон учун 3-вариант матнини ёзинг",
-    },
-    "Namangan": {
-        "1": "Бу ерга Наманган учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Наманган учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Наманган учун 3-вариант матнини ёзинг",
-    },
-    "Qashqadaryo": {
-        "1": "Бу ерга Қашқадарё учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Қашқадарё учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Қашқадарё учун 3-вариант матнини ёзинг",
-    },
-    "Surxondaryo": {
-        "1": "Бу ерга Сурхондарё учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Сурхондарё учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Сурхондарё учун 3-вариант матнини ёзинг",
-    },
-    "Navoiy": {
-        "1": "Бу ерга Навоий учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Навоий учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Навоий учун 3-вариант матнини ёзинг",
-    },
-    "Sirdaryo": {
-        "1": "Бу ерга Сирдарё учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Сирдарё учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Сирдарё учун 3-вариант матнини ёзинг",
-    },
-    "Jizzax": {
-        "1": "Бу ерга Жиззах учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Жиззах учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Жиззах учун 3-вариант матнини ёзинг",
-    },
-    "Xorazm": {
-        "1": "Бу ерга Хоразм учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Хоразм учун 2-вариант матнини ёзинг",
-        "3": "Бу ерга Хоразм учун 3-вариант матнини ёзинг",
-    },
-}
-
-user_region = {}
-
-def region_keyboard():
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="Toshkent"), KeyboardButton(text="Samarqand")],
-            [KeyboardButton(text="Buxoro"), KeyboardButton(text="Farg‘ona")],
-            [KeyboardButton(text="Andijon"), KeyboardButton(text="Namangan")],
-            [KeyboardButton(text="Qashqadaryo"), KeyboardButton(text="Surxondaryo")],
-            [KeyboardButton(text="Navoiy"), KeyboardButton(text="Sirdaryo")],
-            [KeyboardButton(text="Jizzax"), KeyboardButton(text="Xorazm")],
-        ],
-        resize_keyboard=True
+# =========================
+# START
+# =========================
+@bot.message_handler(commands=['start'])
+def start_handler(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    markup.add(
+        "Toshkent", "Samarqand",
+        "Buxoro", "Farg‘ona",
+        "Andijon", "Namangan",
+        "Qashqadaryo", "Surxondaryo",
+        "Navoiy", "Sirdaryo",
+        "Jizzax", "Xorazm"
     )
+    bot.send_message(message.chat.id, "Viloyatni tanlang:", reply_markup=markup)
 
-def variant_keyboard():
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="✅ 1-variant"), KeyboardButton(text="✅ 2-variant")],
-            [KeyboardButton(text="✅ 3-variant"), KeyboardButton(text="⬅️ Orqaga")],
-        ],
-        resize_keyboard=True
+# =========================
+# db yozilganda viloyatlar chiqadi
+# =========================
+@bot.message_handler(func=lambda message: message.text and message.text.lower() == "db")
+def db_handler(message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    markup.add(
+        "Toshkent", "Samarqand",
+        "Buxoro", "Farg‘ona",
+        "Andijon", "Namangan",
+        "Qashqadaryo", "Surxondaryo",
+        "Navoiy", "Sirdaryo",
+        "Jizzax", "Xorazm"
     )
+    bot.send_message(message.chat.id, "Viloyatni tanlang:", reply_markup=markup)
 
-@dp.message(F.photo)
-async def get_photo_id(message: Message):
-    await message.answer(f"PHOTO_ID:\n{message.photo[-1].file_id}")
+# =========================
+# TOSHKENT
+# =========================
+@bot.message_handler(func=lambda message: message.text == "Toshkent")
+def tashkent_handler(message):
+    chat_id = message.chat.id
+    user_state[chat_id] = "toshkent_menu"
 
-@dp.message(F.text == "/start")
-async def start_handler(message: Message):
-    await message.answer(
-        "🌟 Ассалому алайкум!\n\n📍 Вилоятни танланг:",
-        reply_markup=region_keyboard()
-    )
+    # Bu yerda HECH QANDAY rasm/matn ochilmaydi
+    # Faqat 1-2-3 knopka chiqadi
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+    markup.add("1", "2", "3")
+    markup.add("⬅️ Orqaga")
+    bot.send_message(chat_id, "Toshkent bo‘yicha bo‘limni tanlang:", reply_markup=markup)
 
-@dp.message(F.text.in_(regions))
-async def region_handler(message: Message):
-    region = message.text
-    user_region[message.from_user.id] = region
+# =========================
+# 1 TANLANGANDA
+# =========================
+@bot.message_handler(func=lambda message: message.text == "1")
+def one_handler(message):
+    chat_id = message.chat.id
 
-    photos = region_photos.get(region, [])
-    texts = region_texts.get(region, {})
-
-    if photos:
-        for i, photo in enumerate(photos, start=1):
-            caption_text = texts.get(str(i), f"{region} учун {i}-вариант")
-            await message.answer_photo(
-                photo=photo,
-                caption=caption_text
-            )
-    else:
-        await message.answer(f"{region} учун расм ҳали қўшилмаган.")
-
-    await message.answer(
-        "👇 Керакли вариантни танланг:",
-        reply_markup=variant_keyboard()
-    )
-
-@dp.message(F.text == "⬅️ Orqaga")
-async def back_handler(message: Message):
-    await message.answer(
-        "📍 Вилоятни танланг:",
-        reply_markup=region_keyboard()
-    )
-
-@dp.message(F.text.in_(["✅ 1-variant", "✅ 2-variant", "✅ 3-variant"]))
-async def variant_handler(message: Message):
-    region = user_region.get(message.from_user.id)
-
-    if not region:
-        await message.answer(
-            "❗ Аввал вилоятни танланг.",
-            reply_markup=region_keyboard()
-        )
+    if user_state.get(chat_id) != "toshkent_menu":
         return
 
-    variant_map = {
-        "✅ 1-variant": "1",
-        "✅ 2-variant": "2",
-        "✅ 3-variant": "3",
-    }
+    user_state[chat_id] = "choice_1"
 
-    selected_variant = variant_map[message.text]
-    text = region_texts.get(region, {}).get(selected_variant, "Матн топилмади.")
+    # 1-variant uchun rasm va matn
+    photo_1 = "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA"
 
-    await message.answer(text, reply_markup=variant_keyboard())
+    text_1 = (
+        "Bu 1-variant uchun matn.\n"
+        "Shu yerga kerakli yozuvni qo‘yasiz."
+    )
 
-async def main():
-    await dp.start_polling(bot)
+    bot.send_photo(chat_id, photo_1, caption=text_1)
 
-if __name__ == "__main__":
-    asyncio.run(main())
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.add("O‘tkazdim")
+    markup.add("⬅️ Orqaga")
+    bot.send_message(chat_id, "Davom etish uchun tugmani bosing:", reply_markup=markup)
+
+# =========================
+# 2 TANLANGANDA
+# =========================
+@bot.message_handler(func=lambda message: message.text == "2")
+def two_handler(message):
+    chat_id = message.chat.id
+
+    if user_state.get(chat_id) != "toshkent_menu":
+        return
+
+    user_state[chat_id] = "choice_2"
+
+    # 2-variant uchun rasm va matn
+    photo_2 = "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA"
+
+    text_2 = (
+        "Bu 2-variant uchun matn.\n"
+        "Shu yerga 2-bo‘lim matnini yozasiz."
+    )
+
+    bot.send_photo(chat_id, photo_2, caption=text_2)
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.add("O‘tkazdim")
+    markup.add("⬅️ Orqaga")
+    bot.send_message(chat_id, "Davom etish uchun tugmani bosing:", reply_markup=markup)
+
+# =========================
+# 3 TANLANGANDA
+# =========================
+@bot.message_handler(func=lambda message: message.text == "3")
+def three_handler(message):
+    chat_id = message.chat.id
+
+    if user_state.get(chat_id) != "toshkent_menu":
+        return
+
+    user_state[chat_id] = "choice_3"
+
+    # 3-variant uchun rasm va matn
+    photo_3 = "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA"
+
+    text_3 = (
+        "Bu 3-variant uchun matn.\n"
+        "Shu yerga 3-bo‘lim yozuvini qo‘yasiz."
+    )
+
+    bot.send_photo(chat_id, photo_3, caption=text_3)
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.add("O‘tkazdim")
+    markup.add("⬅️ Orqaga")
+    bot.send_message(chat_id, "Davom etish uchun tugmani bosing:", reply_markup=markup)
+
+# =========================
+# O‘TKAZDIM
+# =========================
+@bot.message_handler(func=lambda message: message.text == "O‘tkazdim")
+def otkazdim_handler(message):
+    chat_id = message.chat.id
+    state = user_state.get(chat_id)
+
+    if state == "choice_1":
+        bot.send_message(chat_id, "1-variantdan keyingi matn shu yerda chiqadi.")
+    elif state == "choice_2":
+        bot.send_message(chat_id, "2-variantdan keyingi matn shu yerda chiqadi.")
+    elif state == "choice_3":
+        bot.send_message(chat_id, "3-variantdan keyingi matn shu yerda chiqadi.")
+    else:
+        bot.send_message(chat_id, "Avval 1, 2 yoki 3 dan birini tanlang.")
+        return
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.add("⬅️ Orqaga", "🏠 Bosh menu")
+    bot.send_message(chat_id, "Keyingi amalni tanlang:", reply_markup=markup)
+
+# =========================
+# ORQAGA
+# =========================
+@bot.message_handler(func=lambda message: message.text == "⬅️ Orqaga")
+def back_handler(message):
+    chat_id = message.chat.id
+    state = user_state.get(chat_id)
+
+    # Agar 1/2/3 ichida bo‘lsa, Toshkent menyusiga qaytadi
+    if state in ["choice_1", "choice_2", "choice_3", "toshkent_menu"]:
+        user_state[chat_id] = "toshkent_menu"
+
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
+        markup.add("1", "2", "3")
+        markup.add("⬅️ Orqaga", "🏠 Bosh menu")
+        bot.send_message(chat_id, "Toshkent bo‘yicha bo‘limni tanlang:", reply_markup=markup)
+    else:
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+        markup.add(
+            "Toshkent", "Samarqand",
+            "Buxoro", "Farg‘ona",
+            "Andijon", "Namangan",
+            "Qashqadaryo", "Surxondaryo",
+            "Navoiy", "Sirdaryo",
+            "Jizzax", "Xorazm"
+        )
+        bot.send_message(chat_id, "Viloyatni tanlang:", reply_markup=markup)
+
+# =========================
+# BOSH MENU
+# =========================
+@bot.message_handler(func=lambda message: message.text == "🏠 Bosh menu")
+def home_handler(message):
+    chat_id = message.chat.id
+    user_state[chat_id] = "home"
+
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    markup.add(
+        "Toshkent", "Samarqand",
+        "Buxoro", "Farg‘ona",
+        "Andijon", "Namangan",
+        "Qashqadaryo", "Surxondaryo",
+        "Navoiy", "Sirdaryo",
+        "Jizzax", "Xorazm"
+    )
+    bot.send_message(chat_id, "Bosh menyuga qaytdingiz. Viloyatni tanlang:", reply_markup=markup)
+
+print("Bot ishga tushdi...")
+bot.infinity_polling()
