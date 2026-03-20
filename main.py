@@ -1,8 +1,7 @@
 import asyncio
 import os
 from aiogram import Bot, Dispatcher, F
-from aiogram.types import Message, CallbackQuery
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 
 TOKEN = os.getenv("TOKEN")
 
@@ -17,64 +16,64 @@ regions = [
 
 region_photos = {
     "Toshkent": [
-        ("AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA", "1-variant"),
-        ("AgACAgIAAxkBAANPab2s-Q__7C4HQKR1gzEKj74V84MAApkXaxsfTvFJosNaYYyS1MEBAAMCAAN5AAM6BA", "2-variant"),
-        ("TOSHKENT_3_FILE_ID", "3-variant"),
+        "TOSHKENT_1_FILE_ID",
+        "TOSHKENT_2_FILE_ID",
+        "TOSHKENT_3_FILE_ID",
     ],
     "Samarqand": [
-        ("SAMARQAND_1_FILE_ID", "1-variant"),
-        ("SAMARQAND_2_FILE_ID", "2-variant"),
-        ("SAMARQAND_3_FILE_ID", "3-variant"),
+        "SAMARQAND_1_FILE_ID",
+        "SAMARQAND_2_FILE_ID",
+        "SAMARQAND_3_FILE_ID",
     ],
     "Buxoro": [
-        ("BUXORO_1_FILE_ID", "1-variant"),
-        ("BUXORO_2_FILE_ID", "2-variant"),
-        ("BUXORO_3_FILE_ID", "3-variant"),
+        "BUXORO_1_FILE_ID",
+        "BUXORO_2_FILE_ID",
+        "BUXORO_3_FILE_ID",
     ],
     "Farg‘ona": [
-        ("FARGONA_1_FILE_ID", "1-variant"),
-        ("FARGONA_2_FILE_ID", "2-variant"),
-        ("FARGONA_3_FILE_ID", "3-variant"),
+        "FARGONA_1_FILE_ID",
+        "FARGONA_2_FILE_ID",
+        "FARGONA_3_FILE_ID",
     ],
     "Andijon": [
-        ("ANDIJON_1_FILE_ID", "1-variant"),
-        ("ANDIJON_2_FILE_ID", "2-variant"),
-        ("ANDIJON_3_FILE_ID", "3-variant"),
+        "ANDIJON_1_FILE_ID",
+        "ANDIJON_2_FILE_ID",
+        "ANDIJON_3_FILE_ID",
     ],
     "Namangan": [
-        ("NAMANGAN_1_FILE_ID", "1-variant"),
-        ("NAMANGAN_2_FILE_ID", "2-variant"),
-        ("NAMANGAN_3_FILE_ID", "3-variant"),
+        "NAMANGAN_1_FILE_ID",
+        "NAMANGAN_2_FILE_ID",
+        "NAMANGAN_3_FILE_ID",
     ],
     "Qashqadaryo": [
-        ("QASHQADARYO_1_FILE_ID", "1-variant"),
-        ("QASHQADARYO_2_FILE_ID", "2-variant"),
-        ("QASHQADARYO_3_FILE_ID", "3-variant"),
+        "QASHQADARYO_1_FILE_ID",
+        "QASHQADARYO_2_FILE_ID",
+        "QASHQADARYO_3_FILE_ID",
     ],
     "Surxondaryo": [
-        ("SURXONDARYO_1_FILE_ID", "1-variant"),
-        ("SURXONDARYO_2_FILE_ID", "2-variant"),
-        ("SURXONDARYO_3_FILE_ID", "3-variant"),
+        "SURXONDARYO_1_FILE_ID",
+        "SURXONDARYO_2_FILE_ID",
+        "SURXONDARYO_3_FILE_ID",
     ],
     "Xorazm": [
-        ("XORAZM_1_FILE_ID", "1-variant"),
-        ("XORAZM_2_FILE_ID", "2-variant"),
-        ("XORAZM_3_FILE_ID", "3-variant"),
+        "XORAZM_1_FILE_ID",
+        "XORAZM_2_FILE_ID",
+        "XORAZM_3_FILE_ID",
     ],
     "Navoiy": [
-        ("NAVOIY_1_FILE_ID", "1-variant"),
-        ("NAVOIY_2_FILE_ID", "2-variant"),
-        ("NAVOIY_3_FILE_ID", "3-variant"),
+        "NAVOIY_1_FILE_ID",
+        "NAVOIY_2_FILE_ID",
+        "NAVOIY_3_FILE_ID",
     ],
     "Jizzax": [
-        ("JIZZAX_1_FILE_ID", "1-variant"),
-        ("JIZZAX_2_FILE_ID", "2-variant"),
-        ("JIZZAX_3_FILE_ID", "3-variant"),
+        "JIZZAX_1_FILE_ID",
+        "JIZZAX_2_FILE_ID",
+        "JIZZAX_3_FILE_ID",
     ],
     "Sirdaryo": [
-        ("SIRDARYO_1_FILE_ID", "1-variant"),
-        ("SIRDARYO_2_FILE_ID", "2-variant"),
-        ("SIRDARYO_3_FILE_ID", "3-variant"),
+        "SIRDARYO_1_FILE_ID",
+        "SIRDARYO_2_FILE_ID",
+        "SIRDARYO_3_FILE_ID",
     ],
 }
 
@@ -141,47 +140,65 @@ region_texts = {
     },
 }
 
+user_region = {}
+
 @dp.message(F.photo)
 async def get_photo_id(message: Message):
     await message.answer(f"PHOTO_ID:\n{message.photo[-1].file_id}")
 
 @dp.message(F.text == "/start")
 async def start_handler(message: Message):
-    builder = InlineKeyboardBuilder()
-    for i, region in enumerate(regions):
-        builder.button(text=region, callback_data=f"region_{i}")
-    builder.adjust(1)
-    await message.answer("Viloyatni tanlang:", reply_markup=builder.as_markup())
+    buttons = [[KeyboardButton(text=region)] for region in regions]
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=buttons,
+        resize_keyboard=True
+    )
+    await message.answer("Viloyatni tanlang:", reply_markup=keyboard)
 
-@dp.callback_query(F.data.startswith("region_"))
-async def region_handler(callback: CallbackQuery):
-    index = int(callback.data.split("_")[1])
-    region = regions[index]
+@dp.message(F.text.in_(regions))
+async def region_handler(message: Message):
+    region = message.text
+    user_region[message.from_user.id] = region
 
     photos = region_photos.get(region, [])
-    for i, (photo, caption) in enumerate(photos, start=1):
-        await callback.message.answer_photo(
-            photo=photo,
-            caption=f"{region}\n{i} - {caption}"
-        )
+    if photos:
+        for i, photo in enumerate(photos, start=1):
+            await message.answer_photo(
+                photo=photo,
+                caption=f"{region}\n{i}-variant"
+            )
+    else:
+        await message.answer(f"{region} uchun rasm hali qo‘shilmagan.")
 
-    builder = InlineKeyboardBuilder()
-    builder.button(text="1", callback_data=f"text_{index}_1")
-    builder.button(text="2", callback_data=f"text_{index}_2")
-    builder.button(text="3", callback_data=f"text_{index}_3")
-    builder.adjust(3)
+    variant_keyboard = ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="1"), KeyboardButton(text="2"), KeyboardButton(text="3")],
+            [KeyboardButton(text="⬅️ Orqaga")]
+        ],
+        resize_keyboard=True
+    )
 
-    await callback.message.answer("Variantni tanlang:", reply_markup=builder.as_markup())
-    await callback.answer()
+    await message.answer("Variantni tanlang:", reply_markup=variant_keyboard)
 
-@dp.callback_query(F.data.startswith("text_"))
-async def text_handler(callback: CallbackQuery):
-    _, region_index, variant = callback.data.split("_")
-    region = regions[int(region_index)]
+@dp.message(F.text == "⬅️ Orqaga")
+async def back_handler(message: Message):
+    buttons = [[KeyboardButton(text=region)] for region in regions]
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=buttons,
+        resize_keyboard=True
+    )
+    await message.answer("Viloyatni tanlang:", reply_markup=keyboard)
 
-    text = region_texts.get(region, {}).get(variant, "Matn topilmadi.")
-    await callback.message.answer(text)
-    await callback.answer()
+@dp.message(F.text.in_(["1", "2", "3"]))
+async def variant_handler(message: Message):
+    region = user_region.get(message.from_user.id)
+
+    if not region:
+        await message.answer("Avval viloyatni tanlang.")
+        return
+
+    text = region_texts.get(region, {}).get(message.text, "Matn topilmadi.")
+    await message.answer(text)
 
 async def main():
     await dp.start_polling(bot)
