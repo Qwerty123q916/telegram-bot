@@ -1,7 +1,7 @@
 import asyncio
 import os
 from aiogram import Bot, Dispatcher, F
-from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
+from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 
 TOKEN = os.getenv("TOKEN")
 
@@ -9,138 +9,67 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 regions = [
-    "Toshkent", "Samarqand", "Buxoro", "Farg‘ona",
-    "Andijon", "Namangan", "Qashqadaryo", "Surxondaryo",
-    "Xorazm", "Navoiy", "Jizzax", "Sirdaryo"
+    "Xorazm", "Toshkent",
+    "Farg‘ona", "Jizzax",
+    "Samarqand", "Buxoro",
+    "Andijon", "Namangan",
+    "Qashqadaryo", "Surxondaryo",
+    "Navoiy", "Sirdaryo"
 ]
 
 region_photos = {
-    "Toshkent": [
-        "TOSHKENT_1_FILE_ID",
-        "TOSHKENT_2_FILE_ID",
-        "TOSHKENT_3_FILE_ID",
-    ],
-    "Samarqand": [
-        "SAMARQAND_1_FILE_ID",
-        "SAMARQAND_2_FILE_ID",
-        "SAMARQAND_3_FILE_ID",
-    ],
-    "Buxoro": [
-        "BUXORO_1_FILE_ID",
-        "BUXORO_2_FILE_ID",
-        "BUXORO_3_FILE_ID",
-    ],
-    "Farg‘ona": [
-        "FARGONA_1_FILE_ID",
-        "FARGONA_2_FILE_ID",
-        "FARGONA_3_FILE_ID",
-    ],
-    "Andijon": [
-        "ANDIJON_1_FILE_ID",
-        "ANDIJON_2_FILE_ID",
-        "ANDIJON_3_FILE_ID",
-    ],
-    "Namangan": [
-        "NAMANGAN_1_FILE_ID",
-        "NAMANGAN_2_FILE_ID",
-        "NAMANGAN_3_FILE_ID",
-    ],
-    "Qashqadaryo": [
-        "QASHQADARYO_1_FILE_ID",
-        "QASHQADARYO_2_FILE_ID",
-        "QASHQADARYO_3_FILE_ID",
-    ],
-    "Surxondaryo": [
-        "SURXONDARYO_1_FILE_ID",
-        "SURXONDARYO_2_FILE_ID",
-        "SURXONDARYO_3_FILE_ID",
-    ],
-    "Xorazm": [
-        "XORAZM_1_FILE_ID",
-        "XORAZM_2_FILE_ID",
-        "XORAZM_3_FILE_ID",
-    ],
-    "Navoiy": [
-        "NAVOIY_1_FILE_ID",
-        "NAVOIY_2_FILE_ID",
-        "NAVOIY_3_FILE_ID",
-    ],
-    "Jizzax": [
-        "JIZZAX_1_FILE_ID",
-        "JIZZAX_2_FILE_ID",
-        "JIZZAX_3_FILE_ID",
-    ],
-    "Sirdaryo": [
-        "SIRDARYO_1_FILE_ID",
-        "SIRDARYO_2_FILE_ID",
-        "SIRDARYO_3_FILE_ID",
-    ],
+    "Xorazm": ["XORAZM_1_FILE_ID", "XORAZM_2_FILE_ID", "XORAZM_3_FILE_ID"],
+    "Toshkent": ["TOSHKENT_1_FILE_ID", "TOSHKENT_2_FILE_ID", "TOSHKENT_3_FILE_ID"],
+    "Farg‘ona": ["FARGONA_1_FILE_ID", "FARGONA_2_FILE_ID", "FARGONA_3_FILE_ID"],
+    "Jizzax": ["JIZZAX_1_FILE_ID", "JIZZAX_2_FILE_ID", "JIZZAX_3_FILE_ID"],
+    "Samarqand": ["SAMARQAND_1_FILE_ID", "SAMARQAND_2_FILE_ID", "SAMARQAND_3_FILE_ID"],
+    "Buxoro": ["BUXORO_1_FILE_ID", "BUXORO_2_FILE_ID", "BUXORO_3_FILE_ID"],
+    "Andijon": ["ANDIJON_1_FILE_ID", "ANDIJON_2_FILE_ID", "ANDIJON_3_FILE_ID"],
+    "Namangan": ["NAMANGAN_1_FILE_ID", "NAMANGAN_2_FILE_ID", "NAMANGAN_3_FILE_ID"],
+    "Qashqadaryo": ["QASHQADARYO_1_FILE_ID", "QASHQADARYO_2_FILE_ID", "QASHQADARYO_3_FILE_ID"],
+    "Surxondaryo": ["SURXONDARYO_1_FILE_ID", "SURXONDARYO_2_FILE_ID", "SURXONDARYO_3_FILE_ID"],
+    "Navoiy": ["NAVOIY_1_FILE_ID", "NAVOIY_2_FILE_ID", "NAVOIY_3_FILE_ID"],
+    "Sirdaryo": ["SIRDARYO_1_FILE_ID", "SIRDARYO_2_FILE_ID", "SIRDARYO_3_FILE_ID"],
 }
 
 region_texts = {
-    "Toshkent": {
-        "1": "Toshkent uchun 1-variant matni",
-        "2": "Toshkent uchun 2-variant matni",
-        "3": "Toshkent uchun 3-variant matni",
-    },
-    "Samarqand": {
-        "1": "Samarqand uchun 1-variant matni",
-        "2": "Samarqand uchun 2-variant matni",
-        "3": "Samarqand uchun 3-variant matni",
-    },
-    "Buxoro": {
-        "1": "Buxoro uchun 1-variant matni",
-        "2": "Buxoro uchun 2-variant matni",
-        "3": "Buxoro uchun 3-variant matni",
-    },
-    "Farg‘ona": {
-        "1": "Farg‘ona uchun 1-variant matni",
-        "2": "Farg‘ona uchun 2-variant matni",
-        "3": "Farg‘ona uchun 3-variant matni",
-    },
-    "Andijon": {
-        "1": "Andijon uchun 1-variant matni",
-        "2": "Andijon uchun 2-variant matni",
-        "3": "Andijon uchun 3-variant matni",
-    },
-    "Namangan": {
-        "1": "Namangan uchun 1-variant matni",
-        "2": "Namangan uchun 2-variant matni",
-        "3": "Namangan uchun 3-variant matni",
-    },
-    "Qashqadaryo": {
-        "1": "Qashqadaryo uchun 1-variant matni",
-        "2": "Qashqadaryo uchun 2-variant matni",
-        "3": "Qashqadaryo uchun 3-variant matni",
-    },
-    "Surxondaryo": {
-        "1": "Surxondaryo uchun 1-variant matni",
-        "2": "Surxondaryo uchun 2-variant matni",
-        "3": "Surxondaryo uchun 3-variant matni",
-    },
-    "Xorazm": {
-        "1": "Xorazm uchun 1-variant matni",
-        "2": "Xorazm uchun 2-variant matni",
-        "3": "Xorazm uchun 3-variant matni",
-    },
-    "Navoiy": {
-        "1": "Navoiy uchun 1-variant matni",
-        "2": "Navoiy uchun 2-variant matni",
-        "3": "Navoiy uchun 3-variant matni",
-    },
-    "Jizzax": {
-        "1": "Jizzax uchun 1-variant matni",
-        "2": "Jizzax uchun 2-variant matni",
-        "3": "Jizzax uchun 3-variant matni",
-    },
-    "Sirdaryo": {
-        "1": "Sirdaryo uchun 1-variant matni",
-        "2": "Sirdaryo uchun 2-variant matni",
-        "3": "Sirdaryo uchun 3-variant matni",
-    },
+    "Xorazm": {"1": "Xorazm uchun 1-variant matni", "2": "Xorazm uchun 2-variant matni", "3": "Xorazm uchun 3-variant matni"},
+    "Toshkent": {"1": "Toshkent uchun 1-variant matni", "2": "Toshkent uchun 2-variant matni", "3": "Toshkent uchun 3-variant matni"},
+    "Farg‘ona": {"1": "Farg‘ona uchun 1-variant matni", "2": "Farg‘ona uchun 2-variant matni", "3": "Farg‘ona uchun 3-variant matni"},
+    "Jizzax": {"1": "Jizzax uchun 1-variant matni", "2": "Jizzax uchun 2-variant matni", "3": "Jizzax uchun 3-variant matni"},
+    "Samarqand": {"1": "Samarqand uchun 1-variant matni", "2": "Samarqand uchun 2-variant matni", "3": "Samarqand uchun 3-variant matni"},
+    "Buxoro": {"1": "Buxoro uchun 1-variant matni", "2": "Buxoro uchun 2-variant matni", "3": "Buxoro uchun 3-variant matni"},
+    "Andijon": {"1": "Andijon uchun 1-variant matni", "2": "Andijon uchun 2-variant matni", "3": "Andijon uchun 3-variant matni"},
+    "Namangan": {"1": "Namangan uchun 1-variant matni", "2": "Namangan uchun 2-variant matni", "3": "Namangan uchun 3-variant matni"},
+    "Qashqadaryo": {"1": "Qashqadaryo uchun 1-variant matni", "2": "Qashqadaryo uchun 2-variant matni", "3": "Qashqadaryo uchun 3-variant matni"},
+    "Surxondaryo": {"1": "Surxondaryo uchun 1-variant matni", "2": "Surxondaryo uchun 2-variant matni", "3": "Surxondaryo uchun 3-variant matni"},
+    "Navoiy": {"1": "Navoiy uchun 1-variant matni", "2": "Navoiy uchun 2-variant matni", "3": "Navoiy uchun 3-variant matni"},
+    "Sirdaryo": {"1": "Sirdaryo uchun 1-variant matni", "2": "Sirdaryo uchun 2-variant matni", "3": "Sirdaryo uchun 3-variant matni"},
 }
 
 user_region = {}
+
+def region_keyboard():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="Xorazm"), KeyboardButton(text="Toshkent")],
+            [KeyboardButton(text="Farg‘ona"), KeyboardButton(text="Jizzax")],
+            [KeyboardButton(text="Samarqand"), KeyboardButton(text="Buxoro")],
+            [KeyboardButton(text="Andijon"), KeyboardButton(text="Namangan")],
+            [KeyboardButton(text="Qashqadaryo"), KeyboardButton(text="Surxondaryo")],
+            [KeyboardButton(text="Navoiy"), KeyboardButton(text="Sirdaryo")],
+        ],
+        resize_keyboard=True
+    )
+
+def variant_keyboard():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="1"), KeyboardButton(text="2")],
+            [KeyboardButton(text="3"), KeyboardButton(text="⬅️ Orqaga")],
+        ],
+        resize_keyboard=True
+    )
 
 @dp.message(F.photo)
 async def get_photo_id(message: Message):
@@ -148,12 +77,7 @@ async def get_photo_id(message: Message):
 
 @dp.message(F.text == "/start")
 async def start_handler(message: Message):
-    buttons = [[KeyboardButton(text=region)] for region in regions]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=buttons,
-        resize_keyboard=True
-    )
-    await message.answer("Viloyatni tanlang:", reply_markup=keyboard)
+    await message.answer("Viloyatni tanlang:", reply_markup=region_keyboard())
 
 @dp.message(F.text.in_(regions))
 async def region_handler(message: Message):
@@ -170,35 +94,22 @@ async def region_handler(message: Message):
     else:
         await message.answer(f"{region} uchun rasm hali qo‘shilmagan.")
 
-    variant_keyboard = ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="1"), KeyboardButton(text="2"), KeyboardButton(text="3")],
-            [KeyboardButton(text="⬅️ Orqaga")]
-        ],
-        resize_keyboard=True
-    )
-
-    await message.answer("Variantni tanlang:", reply_markup=variant_keyboard)
+    await message.answer("Variantni tanlang:", reply_markup=variant_keyboard())
 
 @dp.message(F.text == "⬅️ Orqaga")
 async def back_handler(message: Message):
-    buttons = [[KeyboardButton(text=region)] for region in regions]
-    keyboard = ReplyKeyboardMarkup(
-        keyboard=buttons,
-        resize_keyboard=True
-    )
-    await message.answer("Viloyatni tanlang:", reply_markup=keyboard)
+    await message.answer("Viloyatni tanlang:", reply_markup=region_keyboard())
 
 @dp.message(F.text.in_(["1", "2", "3"]))
 async def variant_handler(message: Message):
     region = user_region.get(message.from_user.id)
 
     if not region:
-        await message.answer("Avval viloyatni tanlang.")
+        await message.answer("Avval viloyatni tanlang.", reply_markup=region_keyboard())
         return
 
     text = region_texts.get(region, {}).get(message.text, "Matn topilmadi.")
-    await message.answer(text)
+    await message.answer(text, reply_markup=variant_keyboard())
 
 async def main():
     await dp.start_polling(bot)
