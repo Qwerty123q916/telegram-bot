@@ -16,7 +16,7 @@ regions = [
 
 region_photos = {
     "Toshkent": [
-        "TOSHKENT_1_FILE_ID",
+        "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
         "TOSHKENT_2_FILE_ID",
         "TOSHKENT_3_FILE_ID",
     ],
@@ -112,7 +112,7 @@ region_texts = {
     },
     "Farg‘ona": {
         "1": "Бу ерга Фарғона учун 1-вариант матнини ёзинг",
-        "2": "Бу ерга Фарғона uchun 2-вариант матнини ёзинг",
+        "2": "Бу ерга Фарғона учун 2-вариант матнини ёзинг",
         "3": "Бу ерга Фарғона учун 3-вариант матнини ёзинг",
     },
     "Andijon": {
