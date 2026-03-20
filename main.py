@@ -1,6 +1,4 @@
-import asyncio
-import os
-from aiogram import Bot, Dispatcher, F
+import Bot, Dispatcher, F
 from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
 
 TOKEN = os.getenv("TOKEN")
@@ -45,30 +43,4 @@ async def region_handler(callback: CallbackQuery):
         inline_keyboard=[
             [
                 InlineKeyboardButton(text="1", callback_data=f"text_{index}_1"),
-                InlineKeyboardButton(text="2", callback_data=f"text_{index}_2"),
-                InlineKeyboardButton(text="3", callback_data=f"text_{index}_3"),
-            ]
-        ]
-    )
-    await callback.message.answer("Variantni tanlang:", reply_markup=keyboard)
-    await callback.answer()
-
-@dp.callback_query(F.data.startswith("text_"))
-async def text_handler(callback: CallbackQuery):
-    _, region_index, variant = callback.data.split("_")
-    region = regions[int(region_index)]
-
-    texts = {
-        "1": f"{region} uchun 1-variant matni.",
-        "2": f"{region} uchun 2-variant matni.",
-        "3": f"{region} uchun 3-variant matni.",
-    }
-
-    await callback.message.answer(texts.get(variant, "Matn topilmadi."))
-    await callback.answer()
-
-async def main():
-    await dp.start_polling(bot)
-
-if __name__ == "__main__":
-    asyncio.run(main())
+                
