@@ -17,8 +17,8 @@ regions = [
 region_photos = {
     "Toshkent": [
         "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
-        "TOSHKENT_2_FILE_ID",
-        "TOSHKENT_3_FILE_ID",
+        "AgACAgIAAxkBAAP7ab3AcVlJ4sAlgkXCikxZYlZP3hwAAhYQaxt7svBJnDtuKqP22bEBAAMCAAN5AAM6BA",
+        "AgACAgIAAxkBAAP9ab3AuboJy0Lj5lydTvbHqcERyaAAAhcQaxt7svBJcOvpIuau7E0BAAMCAAN5AAM6BA",
     ],
     "Samarqand": [
         "SAMARQAND_1_FILE_ID",
