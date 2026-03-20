@@ -9,42 +9,135 @@ bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
 regions = [
-    "Xorazm", "Toshkent",
-    "Farg‘ona", "Jizzax",
-    "Samarqand", "Buxoro",
-    "Andijon", "Namangan",
-    "Qashqadaryo", "Surxondaryo",
-    "Navoiy", "Sirdaryo"
+    "Toshkent", "Samarqand", "Buxoro", "Farg‘ona",
+    "Andijon", "Namangan", "Qashqadaryo", "Surxondaryo",
+    "Navoiy", "Sirdaryo", "Jizzax", "Xorazm"
 ]
 
 region_photos = {
-    "Xorazm": ["XORAZM_1_FILE_ID", "XORAZM_2_FILE_ID", "XORAZM_3_FILE_ID"],
-    "Toshkent": ["TOSHKENT_1_FILE_ID", "TOSHKENT_2_FILE_ID", "TOSHKENT_3_FILE_ID"],
-    "Farg‘ona": ["FARGONA_1_FILE_ID", "FARGONA_2_FILE_ID", "FARGONA_3_FILE_ID"],
-    "Jizzax": ["JIZZAX_1_FILE_ID", "JIZZAX_2_FILE_ID", "JIZZAX_3_FILE_ID"],
-    "Samarqand": ["SAMARQAND_1_FILE_ID", "SAMARQAND_2_FILE_ID", "SAMARQAND_3_FILE_ID"],
-    "Buxoro": ["BUXORO_1_FILE_ID", "BUXORO_2_FILE_ID", "BUXORO_3_FILE_ID"],
-    "Andijon": ["ANDIJON_1_FILE_ID", "ANDIJON_2_FILE_ID", "ANDIJON_3_FILE_ID"],
-    "Namangan": ["NAMANGAN_1_FILE_ID", "NAMANGAN_2_FILE_ID", "NAMANGAN_3_FILE_ID"],
-    "Qashqadaryo": ["QASHQADARYO_1_FILE_ID", "QASHQADARYO_2_FILE_ID", "QASHQADARYO_3_FILE_ID"],
-    "Surxondaryo": ["SURXONDARYO_1_FILE_ID", "SURXONDARYO_2_FILE_ID", "SURXONDARYO_3_FILE_ID"],
-    "Navoiy": ["NAVOIY_1_FILE_ID", "NAVOIY_2_FILE_ID", "NAVOIY_3_FILE_ID"],
-    "Sirdaryo": ["SIRDARYO_1_FILE_ID", "SIRDARYO_2_FILE_ID", "SIRDARYO_3_FILE_ID"],
+    "Toshkent": [
+        "TOSHKENT_1_FILE_ID",
+        "TOSHKENT_2_FILE_ID",
+        "TOSHKENT_3_FILE_ID",
+    ],
+    "Samarqand": [
+        "SAMARQAND_1_FILE_ID",
+        "SAMARQAND_2_FILE_ID",
+        "SAMARQAND_3_FILE_ID",
+    ],
+    "Buxoro": [
+        "BUXORO_1_FILE_ID",
+        "BUXORO_2_FILE_ID",
+        "BUXORO_3_FILE_ID",
+    ],
+    "Farg‘ona": [
+        "FARGONA_1_FILE_ID",
+        "FARGONA_2_FILE_ID",
+        "FARGONA_3_FILE_ID",
+    ],
+    "Andijon": [
+        "ANDIJON_1_FILE_ID",
+        "ANDIJON_2_FILE_ID",
+        "ANDIJON_3_FILE_ID",
+    ],
+    "Namangan": [
+        "NAMANGAN_1_FILE_ID",
+        "NAMANGAN_2_FILE_ID",
+        "NAMANGAN_3_FILE_ID",
+    ],
+    "Qashqadaryo": [
+        "QASHQADARYO_1_FILE_ID",
+        "QASHQADARYO_2_FILE_ID",
+        "QASHQADARYO_3_FILE_ID",
+    ],
+    "Surxondaryo": [
+        "SURXONDARYO_1_FILE_ID",
+        "SURXONDARYO_2_FILE_ID",
+        "SURXONDARYO_3_FILE_ID",
+    ],
+    "Navoiy": [
+        "NAVOIY_1_FILE_ID",
+        "NAVOIY_2_FILE_ID",
+        "NAVOIY_3_FILE_ID",
+    ],
+    "Sirdaryo": [
+        "SIRDARYO_1_FILE_ID",
+        "SIRDARYO_2_FILE_ID",
+        "SIRDARYO_3_FILE_ID",
+    ],
+    "Jizzax": [
+        "JIZZAX_1_FILE_ID",
+        "JIZZAX_2_FILE_ID",
+        "JIZZAX_3_FILE_ID",
+    ],
+    "Xorazm": [
+        "XORAZM_1_FILE_ID",
+        "XORAZM_2_FILE_ID",
+        "XORAZM_3_FILE_ID",
+    ],
 }
 
 region_texts = {
-    "Xorazm": {"1": "Xorazm uchun 1-variant matni", "2": "Xorazm uchun 2-variant matni", "3": "Xorazm uchun 3-variant matni"},
-    "Toshkent": {"1": "Toshkent uchun 1-variant matni", "2": "Toshkent uchun 2-variant matni", "3": "Toshkent uchun 3-variant matni"},
-    "Farg‘ona": {"1": "Farg‘ona uchun 1-variant matni", "2": "Farg‘ona uchun 2-variant matni", "3": "Farg‘ona uchun 3-variant matni"},
-    "Jizzax": {"1": "Jizzax uchun 1-variant matni", "2": "Jizzax uchun 2-variant matni", "3": "Jizzax uchun 3-variant matni"},
-    "Samarqand": {"1": "Samarqand uchun 1-variant matni", "2": "Samarqand uchun 2-variant matni", "3": "Samarqand uchun 3-variant matni"},
-    "Buxoro": {"1": "Buxoro uchun 1-variant matni", "2": "Buxoro uchun 2-variant matni", "3": "Buxoro uchun 3-variant matni"},
-    "Andijon": {"1": "Andijon uchun 1-variant matni", "2": "Andijon uchun 2-variant matni", "3": "Andijon uchun 3-variant matni"},
-    "Namangan": {"1": "Namangan uchun 1-variant matni", "2": "Namangan uchun 2-variant matni", "3": "Namangan uchun 3-variant matni"},
-    "Qashqadaryo": {"1": "Qashqadaryo uchun 1-variant matni", "2": "Qashqadaryo uchun 2-variant matni", "3": "Qashqadaryo uchun 3-variant matni"},
-    "Surxondaryo": {"1": "Surxondaryo uchun 1-variant matni", "2": "Surxondaryo uchun 2-variant matni", "3": "Surxondaryo uchun 3-variant matni"},
-    "Navoiy": {"1": "Navoiy uchun 1-variant matni", "2": "Navoiy uchun 2-variant matni", "3": "Navoiy uchun 3-variant matni"},
-    "Sirdaryo": {"1": "Sirdaryo uchun 1-variant matni", "2": "Sirdaryo uchun 2-variant matni", "3": "Sirdaryo uchun 3-variant matni"},
+    "Toshkent": {
+        "1": "Toshkent uchun 1-variant matni",
+        "2": "Toshkent uchun 2-variant matni",
+        "3": "Toshkent uchun 3-variant matni",
+    },
+    "Samarqand": {
+        "1": "Samarqand uchun 1-variant matni",
+        "2": "Samarqand uchun 2-variant matni",
+        "3": "Samarqand uchun 3-variant matni",
+    },
+    "Buxoro": {
+        "1": "Buxoro uchun 1-variant matni",
+        "2": "Buxoro uchun 2-variant matni",
+        "3": "Buxoro uchun 3-variant matni",
+    },
+    "Farg‘ona": {
+        "1": "Farg‘ona uchun 1-variant matni",
+        "2": "Farg‘ona uchun 2-variant matni",
+        "3": "Farg‘ona uchun 3-variant matni",
+    },
+    "Andijon": {
+        "1": "Andijon uchun 1-variant matni",
+        "2": "Andijon uchun 2-variant matni",
+        "3": "Andijon uchun 3-variant matni",
+    },
+    "Namangan": {
+        "1": "Namangan uchun 1-variant matni",
+        "2": "Namangan uchun 2-variant matni",
+        "3": "Namangan uchun 3-variant matni",
+    },
+    "Qashqadaryo": {
+        "1": "Qashqadaryo uchun 1-variant matni",
+        "2": "Qashqadaryo uchun 2-variant matni",
+        "3": "Qashqadaryo uchun 3-variant matni",
+    },
+    "Surxondaryo": {
+        "1": "Surxondaryo uchun 1-variant matni",
+        "2": "Surxondaryo uchun 2-variant matni",
+        "3": "Surxondaryo uchun 3-variant matni",
+    },
+    "Navoiy": {
+        "1": "Navoiy uchun 1-variant matni",
+        "2": "Navoiy uchun 2-variant matni",
+        "3": "Navoiy uchun 3-variant matni",
+    },
+    "Sirdaryo": {
+        "1": "Sirdaryo uchun 1-variant matni",
+        "2": "Sirdaryo uchun 2-variant matni",
+        "3": "Sirdaryo uchun 3-variant matni",
+    },
+    "Jizzax": {
+        "1": "Jizzax uchun 1-variant matni",
+        "2": "Jizzax uchun 2-variant matni",
+        "3": "Jizzax uchun 3-variant matni",
+    },
+    "Xorazm": {
+        "1": "Xorazm uchun 1-variant matni",
+        "2": "Xorazm uchun 2-variant matni",
+        "3": "Xorazm uchun 3-variant matni",
+    },
 }
 
 user_region = {}
@@ -52,12 +145,12 @@ user_region = {}
 def region_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="Xorazm"), KeyboardButton(text="Toshkent")],
-            [KeyboardButton(text="Farg‘ona"), KeyboardButton(text="Jizzax")],
-            [KeyboardButton(text="Samarqand"), KeyboardButton(text="Buxoro")],
+            [KeyboardButton(text="Toshkent"), KeyboardButton(text="Samarqand")],
+            [KeyboardButton(text="Buxoro"), KeyboardButton(text="Farg‘ona")],
             [KeyboardButton(text="Andijon"), KeyboardButton(text="Namangan")],
             [KeyboardButton(text="Qashqadaryo"), KeyboardButton(text="Surxondaryo")],
             [KeyboardButton(text="Navoiy"), KeyboardButton(text="Sirdaryo")],
+            [KeyboardButton(text="Jizzax"), KeyboardButton(text="Xorazm")],
         ],
         resize_keyboard=True
     )
