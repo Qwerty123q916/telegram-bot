@@ -16,7 +16,7 @@ regions = [
 
 region_photos = {
     "Toshkent": [
-        "TOSHKENT_1_FILE_ID",
+        "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
         "TOSHKENT_2_FILE_ID",
         "TOSHKENT_3_FILE_ID",
     ],
@@ -79,7 +79,28 @@ region_photos = {
 
 region_texts = {
     "Toshkent": {
-        "1": "Toshkent uchun 1-variant matni",
+        "1": "Toshkent uchun 1-variant Шахарни энг тоза ва ишончли салондаридан бири
+
+ФОТО 100% РЕАЛ!!!
+     
+Массаж нархлари: 800.000-1.800.000 сум
+
+1)Классический 
+2)Релакс
+3)Оздоровительный 
+4)Спортивный 
+5)Микс 2/1
+6)Микс 3/1
+7)Микс 4/1 
+8)Общий 
+10)Универсальный 
+11)Королевский 2 та киз бн😍
+
+Язык: Русский, турецкий, казахискый
+
+Танловда адашманг! 
+
+Ёш гозал кизларни ишга оламиз ёш чегараси 18-30 matni",
         "2": "Toshkent uchun 2-variant matni",
         "3": "Toshkent uchun 3-variant matni",
     },
