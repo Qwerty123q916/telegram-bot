@@ -117,7 +117,7 @@ region_photos = {
     "Navoiy": [
         "AgACAgIAAxkBAAIBgWm-EGPwBWXJZtQgCQzeU-23-rypAAJcEWsbbw3wSX6gI2plsJoaAQADAgADeQADOgQ",
         "AgACAgIAAxkBAAIBf2m-EGNYJCS9jepX2NQ1j-f_qbDUAAJaEWsbbw3wST-DEhvMXZqQAQADAgADeQADOgQ",
-        "AgACAgIAAxkBAAIBb2m-EFxxiPD8wYlRsFlCai4hrYloAAJUEWsbbw3wSfK6Oz2JlaXnAQADAgADeQODOgQ",
+        "AgACAgIAAxkBAAIBb2m-EFxxiPD8wYlRsFlCai4hrYloAAJUEWsbbw3wSfK6Oz2JlaXnAQADAgADeQADOgQ",
     ],
     "Sirdaryo": [
         "AgACAgIAAxkBAAIBcWm-EFxRKup3r0u8xwteFwk_IvmNAAJWEWsbbw3wSQXxZMRqegJ_AQADAgADeQADOgQ",
@@ -143,6 +143,14 @@ user_region = {}
 user_variant = {}
 waiting_for_broadcast = set()
 
+def start_keyboard():
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="📍 Viloyatni tanlash")]
+        ],
+        resize_keyboard=True
+    )
+
 def region_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
@@ -152,6 +160,7 @@ def region_keyboard():
             [KeyboardButton(text="Qashqadaryo"), KeyboardButton(text="Surxondaryo")],
             [KeyboardButton(text="Navoiy"), KeyboardButton(text="Sirdaryo")],
             [KeyboardButton(text="Jizzax"), KeyboardButton(text="Xorazm")],
+            [KeyboardButton(text="🏠 Bosh menyu")],
         ],
         resize_keyboard=True
     )
@@ -195,6 +204,10 @@ async def start_handler(message: Message):
     save_user(message.from_user)
     user_region.pop(message.from_user.id, None)
     user_variant.pop(message.from_user.id, None)
+    await message.answer("Xush kelibsiz", reply_markup=start_keyboard())
+
+@dp.message(F.text == "📍 Viloyatni tanlash")
+async def choose_region_handler(message: Message):
     await message.answer("📍 Viloyatni tanlang:", reply_markup=region_keyboard())
 
 @dp.message(F.text == "/admin")
@@ -254,7 +267,10 @@ async def broadcast_start(message: Message):
 async def home_handler(message: Message):
     user_region.pop(message.from_user.id, None)
     user_variant.pop(message.from_user.id, None)
-    await message.answer("🏠 Bosh menyu", reply_markup=region_keyboard())
+    if is_admin(message.from_user.id):
+        await message.answer("🏠 Bosh menyu", reply_markup=start_keyboard())
+    else:
+        await message.answer("🏠 Bosh menyu", reply_markup=start_keyboard())
 
 @dp.message()
 async def universal_handler(message: Message):
