@@ -304,7 +304,7 @@ async def universal_handler(message: Message):
         await message.answer("👇 Kerakli variantni tanlang:", reply_markup=variant_keyboard())
         return
 
-    if message.text in ["1", "2", "3"]:
+    if message.text in ["1", "2", "3", "4", "5"]:
         region = user_region.get(message.from_user.id)
         if not region:
             await message.answer("Avval viloyatni tanlang.", reply_markup=region_keyboard())
