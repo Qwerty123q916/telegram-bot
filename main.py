@@ -34,8 +34,8 @@ common_text = """📸 ФОТОЛАР РЕАЛ
 region_photos = {
     "Toshkent": [
         "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
-        "AgACAgIAAxkBAAIBZmm-EDqpxi6ZgTn5R2ffSBz6f8nmAAJNEWsbbw3wSeX1-Q-WwsJBAQADAgADeQADOgQ",
-        "AgACAgIAAxkBAAIBZWm-EDouVHmR3NI8WUcjxMm94uSlAAJMEWsbbw3wSeOoje6dCN4CAQADAgADeQADOgQ",
+        "AgACAgIAAxkBAAIBrGm-Efnp9taM0Q42hf1DAuWBWfpfAAJyEWsbbw3wSbLvEH35KOTMAQADAgADeAADOgQ",
+        "AgACAgIAAxkBAAIBq2m-EfnoBq_SJwQAAZzf3AsXYfTPxQACcRFrG28N8EkBNxAWKHNUKQEAAwIAA3gAAzoE",
     ],
     "Samarqand": [
         "PHOTO_ID_4",
@@ -100,124 +100,32 @@ region_texts = {
         "2": "✨ Бу ерга Тошкент учун 2-вариант матнини ёзинг",
         "3": "🔥 Бу ерга Тошкент учун 3-вариант матнини ёзинг",
     },
-    "Samarqand": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Buxoro": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Farg‘ona": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Andijon": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Namangan": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Qashqadaryo": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Surxondaryo": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Navoiy": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Sirdaryo": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Jizzax": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
-    "Xorazm": {
-        "1": common_text,
-        "2": common_text,
-        "3": common_text,
-    },
+    "Samarqand": {"1": common_text, "2": common_text, "3": common_text},
+    "Buxoro": {"1": common_text, "2": common_text, "3": common_text},
+    "Farg‘ona": {"1": common_text, "2": common_text, "3": common_text},
+    "Andijon": {"1": common_text, "2": common_text, "3": common_text},
+    "Namangan": {"1": common_text, "2": common_text, "3": common_text},
+    "Qashqadaryo": {"1": common_text, "2": common_text, "3": common_text},
+    "Surxondaryo": {"1": common_text, "2": common_text, "3": common_text},
+    "Navoiy": {"1": common_text, "2": common_text, "3": common_text},
+    "Sirdaryo": {"1": common_text, "2": common_text, "3": common_text},
+    "Jizzax": {"1": common_text, "2": common_text, "3": common_text},
+    "Xorazm": {"1": common_text, "2": common_text, "3": common_text},
 }
 
 confirm_texts = {
-    "Toshkent": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Samarqand": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Buxoro": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Farg‘ona": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Andijon": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Namangan": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Qashqadaryo": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Surxondaryo": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Navoiy": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Sirdaryo": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Jizzax": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
-    "Xorazm": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    },
+    "Toshkent": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Samarqand": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Buxoro": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Farg‘ona": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Andijon": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Namangan": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Qashqadaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Surxondaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Navoiy": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Sirdaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Jizzax": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Xorazm": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
 }
 
 user_region = {}
