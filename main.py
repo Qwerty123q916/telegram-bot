@@ -7,6 +7,11 @@ TOKEN = os.getenv("TOKEN")
 if not TOKEN:
     raise ValueError("TOKEN topilmadi")
 
+ADMIN_ID = 7890489981
+
+def is_admin(user_id: int) -> bool:
+    return user_id == ADMIN_ID
+
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
@@ -164,6 +169,8 @@ def confirm_keyboard():
 
 @dp.message(F.photo)
 async def get_photo_id(message: Message):
+    if not is_admin(message.from_user.id):
+        return
     await message.answer(f"PHOTO_ID:\n{message.photo[-1].file_id}")
 
 @dp.message(F.text == "/start")
@@ -171,6 +178,13 @@ async def start_handler(message: Message):
     user_region.pop(message.from_user.id, None)
     user_variant.pop(message.from_user.id, None)
     await message.answer("📍 Вилоятни танланг:", reply_markup=region_keyboard())
+
+@dp.message(F.text == "/admin")
+async def admin_panel(message: Message):
+    if not is_admin(message.from_user.id):
+        await message.answer("Siz admin emassiz.")
+        return
+    await message.answer("Admin panelga xush kelibsiz.")
 
 @dp.message(F.text.in_(regions))
 async def region_handler(message: Message):
@@ -184,21 +198,21 @@ async def region_handler(message: Message):
         for photo in photos:
             await message.answer_photo(photo=photo, caption=common_text)
     else:
-        await message.answer("Бу вилоят учун ҳозирча расм қўйилмаган.")
+        await message.answer("Bu viloyat uchun hozircha rasm qo‘yilmagan.")
 
-    await message.answer("👇 Керакли вариантни танланг:", reply_markup=variant_keyboard())
+    await message.answer("👇 Kerakli variantni tanlang:", reply_markup=variant_keyboard())
 
 @dp.message(F.text.in_(["1", "2", "3"]))
 async def variant_handler(message: Message):
     region = user_region.get(message.from_user.id)
     if not region:
-        await message.answer("Аввал вилоятни танланг.", reply_markup=region_keyboard())
+        await message.answer("Avval viloyatni tanlang.", reply_markup=region_keyboard())
         return
 
     variant = message.text
     user_variant[message.from_user.id] = variant
 
-    text = region_texts.get(region, {}).get(variant, "Матн топилмади.")
+    text = region_texts.get(region, {}).get(variant, "Matn topilmadi.")
     await message.answer(text, reply_markup=confirm_keyboard())
 
 @dp.message(F.text == "✅ O‘tkazdim")
@@ -207,7 +221,7 @@ async def confirm_handler(message: Message):
     variant = user_variant.get(message.from_user.id)
 
     if not region or not variant:
-        await message.answer("Аввал вилоят ва вариантни танланг.", reply_markup=region_keyboard())
+        await message.answer("Avval viloyat va variantni tanlang.", reply_markup=region_keyboard())
         return
 
     text = confirm_texts.get(region, {}).get(variant, "❌XATOLIK❌")
@@ -217,7 +231,7 @@ async def confirm_handler(message: Message):
 async def back_handler(message: Message):
     user_region.pop(message.from_user.id, None)
     user_variant.pop(message.from_user.id, None)
-    await message.answer("📍 Вилоятни танланг:", reply_markup=region_keyboard())
+    await message.answer("📍 Viloyatni tanlang:", reply_markup=region_keyboard())
 
 async def main():
     await dp.start_polling(bot)
