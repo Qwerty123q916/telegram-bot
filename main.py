@@ -78,14 +78,11 @@ region_photos = {
         "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
         "AgACAgIAAxkBAAIBrGm-Efnp9taM0Q42hf1DAuWBWfpfAAJyEWsbbw3wSbLvEH35KOTMAQADAgADeAADOgQ",
         "AgACAgIAAxkBAAIBq2m-EfnoBq_SJwQAAZzf3AsXYfTPxQACcRFrG28N8EkBNxAWKHNUKQEAAwIAA3gAAzoE",
-        "AgACAgEAAxkBAAICgGm-Q7y4yHvzGxic9MNSsUN3iWixAAKuC2sbRQHwRR51XU8MEv5IAQADAgADeQADOgQ",
-        "AgACAgEAAxkBAAICtGm-aHQOm97NSa0rDbnTji23swhYAALEC2sbRQHwRTlO_x8vrfyGAQADAgADeQADOgQ",
     ],
     "Samarqand": [
         "AgACAgIAAxkBAAIBrGm-Efnp9taM0Q42hf1DAuWBWfpfAAJyEWsbbw3wSbLvEH35KOTMAQADAgADeAADOgQ",
         "AgACAgIAAxkBAAIBpmm-EZ7wzDBA7M6n8-XfLisX83zGAAJwEWsbbw3wSfJVsSWx1vXEAQADAgADeQADOgQ",
         "AgACAgIAAxkBAAIBpWm-EZ60wvN8u5H_C9dqWvC5BnJnAAJvEWsbbw3wSYcuoFPvk38bAQADAgADeAADOgQ",
-        "AgACAgEAAxkBAAIC7mm-awLCCt8IunhUzIH7PMI5slciAALFC2sbRQHwRWwRGsKuiDYOAQADAgADeQADOgQ",
     ],
     "Buxoro": [
         "AgACAgIAAxkBAAIBpGm-EZ5qGMFYLCVegPTu93ECO8GcAAJuEWsbbw3wSbtf6OKst8XVAQADAgADeQADOgQ",
@@ -171,7 +168,7 @@ def region_keyboard():
 def variant_keyboard():
     return ReplyKeyboardMarkup(
         keyboard=[
-            [KeyboardButton(text="1"), KeyboardButton(text="2"), KeyboardButton(text="3"), KeyboardButton(text="4"), KeyboardButton(text="5"),],
+            [KeyboardButton(text="1"), KeyboardButton(text="2"), KeyboardButton(text="3"),],
             [KeyboardButton(text="⬅️ Orqaga"), KeyboardButton(text="🏠 Bosh menyu")],
         ],
         resize_keyboard=True
@@ -305,7 +302,7 @@ async def universal_handler(message: Message):
         await message.answer("👇 Kerakli variantni tanlang:", reply_markup=variant_keyboard())
         return
 
-    if message.text in ["1", "2", "3", "4", "5"]:
+    if message.text in ["1", "2", "3"]:
         region = user_region.get(message.from_user.id)
         if not region:
             await message.answer("Avval viloyatni tanlang.", reply_markup=region_keyboard())
