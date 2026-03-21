@@ -5,7 +5,7 @@ from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 
 TOKEN = os.getenv("TOKEN")
 if not TOKEN:
-    raise ValueError("TOKEN topilmadi. Railway Variables ga TOKEN qo‘shing.")
+    raise ValueError("TOKEN topilmadi")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -16,7 +16,9 @@ regions = [
     "Navoiy", "Sirdaryo", "Jizzax", "Xorazm"
 ]
 
-common_text = """📸 ФОТОЛАР РЕАЛ
+common_text = """🌟 Шаҳардаги ишончли ва қулай хизматлардан бири
+
+📸 ФОТОЛАР РЕАЛ
 
 📋 Хизмат турлари:
 1) Классик
@@ -29,7 +31,7 @@ common_text = """📸 ФОТОЛАР РЕАЛ
 8) Умумий
 9) Универсал
 
-🗣 Тиллар: Русский, Узбекча
+🗣 Тиллар: Русский, туркча, қозоқча
 
 ✅ Тўғри танлов қилинг!"""
 
@@ -54,9 +56,9 @@ region_photos = {
 
 region_texts = {
     "Toshkent": {
-        "1": "✨ Бу ерга Тошкент учун 1-вариант матнини ёзинг",
-        "2": "✨ Бу ерга Тошкент учун 2-вариант матнини ёзинг",
-        "3": "🔥 Бу ерга Тошкент учун 3-вариант матнини ёзинг",
+        "1": "1-variant matni",
+        "2": "2-variant matni",
+        "3": "3-variant matni",
     }
 }
 
@@ -121,12 +123,11 @@ async def region_handler(message: Message):
     photos = region_photos.get(region, [])
 
     if photos:
-        for i, photo in enumerate(photos, start=1):
-            caption = region_texts.get(region, {}).get(str(i), common_text)
-            try:
-                await message.answer_photo(photo=photo, caption=caption)
-            except Exception as e:
-                await message.answer(f"{i}-rasm yuborilmadi: {e}")
+        for photo in photos:
+            await message.answer_photo(
+                photo=photo,
+                caption=common_text
+            )
 
     await message.answer("👇 Керакли вариантни танланг:", reply_markup=variant_keyboard())
 
