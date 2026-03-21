@@ -34,8 +34,8 @@ common_text = """📸 ФОТОЛАР РЕАЛ
 region_photos = {
     "Toshkent": [
         "AgACAgIAAxkBAAM0ab2pKkvg5q89v2i_61S_IGjEEJ4AAoUXaxsfTvFJkDRek4-ZPk0BAAMCAAN5AAM6BA",
-        "PHOTO_ID_2",
-        "PHOTO_ID_3",
+        "AgACAgIAAxkBAAIBZmm-EDqpxi6ZgTn5R2ffSBz6f8nmAAJNEWsbbw3wSeX1-Q-WwsJBAQADAgADeQADOgQ",
+        "AgACAgIAAxkBAAIBZWm-EDouVHmR3NI8WUcjxMm94uSlAAJMEWsbbw3wSeOoje6dCN4CAQADAgADeQADOgQ",
     ],
     "Samarqand": [
         "PHOTO_ID_4",
@@ -96,80 +96,128 @@ region_photos = {
 
 region_texts = {
     "Toshkent": {
-        "1": "Toshkent 1-variant matni",
-        "2": "Toshkent 2-variant matni",
-        "3": "Toshkent 3-variant matni",
+        "1": "✨ Бу ерга Тошкент учун 1-вариант матнини ёзинг",
+        "2": "✨ Бу ерга Тошкент учун 2-вариант матнини ёзинг",
+        "3": "🔥 Бу ерга Тошкент учун 3-вариант матнини ёзинг",
     },
     "Samarqand": {
-        "1": "Samarqand 1-variant matni",
-        "2": "Samarqand 2-variant matni",
-        "3": "Samarqand 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Buxoro": {
-        "1": "Buxoro 1-variant matni",
-        "2": "Buxoro 2-variant matni",
-        "3": "Buxoro 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Farg‘ona": {
-        "1": "Farg‘ona 1-variant matni",
-        "2": "Farg‘ona 2-variant matni",
-        "3": "Farg‘ona 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Andijon": {
-        "1": "Andijon 1-variant matni",
-        "2": "Andijon 2-variant matni",
-        "3": "Andijon 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Namangan": {
-        "1": "Namangan 1-variant matni",
-        "2": "Namangan 2-variant matni",
-        "3": "Namangan 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Qashqadaryo": {
-        "1": "Qashqadaryo 1-variant matni",
-        "2": "Qashqadaryo 2-variant matni",
-        "3": "Qashqadaryo 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Surxondaryo": {
-        "1": "Surxondaryo 1-variant matni",
-        "2": "Surxondaryo 2-variant matni",
-        "3": "Surxondaryo 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Navoiy": {
-        "1": "Navoiy 1-variant matni",
-        "2": "Navoiy 2-variant matni",
-        "3": "Navoiy 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Sirdaryo": {
-        "1": "Sirdaryo 1-variant matni",
-        "2": "Sirdaryo 2-variant matni",
-        "3": "Sirdaryo 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Jizzax": {
-        "1": "Jizzax 1-variant matni",
-        "2": "Jizzax 2-variant matni",
-        "3": "Jizzax 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
     "Xorazm": {
-        "1": "Xorazm 1-variant matni",
-        "2": "Xorazm 2-variant matni",
-        "3": "Xorazm 3-variant matni",
+        "1": common_text,
+        "2": common_text,
+        "3": common_text,
     },
 }
 
 confirm_texts = {
-    "Toshkent": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Samarqand": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Buxoro": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Farg‘ona": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Andijon": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Namangan": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Qashqadaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Surxondaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Navoiy": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Sirdaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Jizzax": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Xorazm": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Toshkent": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Samarqand": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Buxoro": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Farg‘ona": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Andijon": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Namangan": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Qashqadaryo": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Surxondaryo": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Navoiy": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Sirdaryo": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Jizzax": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
+    "Xorazm": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    },
 }
 
 user_region = {}
@@ -226,13 +274,8 @@ async def region_handler(message: Message):
 
     if photos:
         for i, photo in enumerate(photos, start=1):
-            if i == 3:
-                await message.answer_photo(
-                    photo=photo,
-                    caption=common_text
-                )
-            else:
-                await message.answer_photo(photo=photo)
+            caption = region_texts.get(region, {}).get(str(i), common_text)
+            await message.answer_photo(photo=photo, caption=caption)
 
     await message.answer("👇 Керакли вариантни танланг:", reply_markup=variant_keyboard())
 
