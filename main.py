@@ -41,33 +41,91 @@ region_photos = {
         "AgACAgIAAxkBAAIBrGm-Efnp9taM0Q42hf1DAuWBWfpfAAJyEWsbbw3wSbLvEH35KOTMAQADAgADeAADOgQ",
         "AgACAgIAAxkBAAIBq2m-EfnoBq_SJwQAAZzf3AsXYfTPxQACcRFrG28N8EkBNxAWKHNUKQEAAwIAA3gAAzoE",
     ],
-    "Samarqand": [],
-    "Buxoro": [],
-    "Farg‘ona": [],
-    "Andijon": [],
-    "Namangan": [],
-    "Qashqadaryo": [],
-    "Surxondaryo": [],
-    "Navoiy": [],
-    "Sirdaryo": [],
-    "Jizzax": [],
-    "Xorazm": [],
+    "Samarqand": [
+        "PHOTO_ID_SAMARQAND_1",
+        "PHOTO_ID_SAMARQAND_2",
+        "PHOTO_ID_SAMARQAND_3",
+    ],
+    "Buxoro": [
+        "PHOTO_ID_BUXORO_1",
+        "PHOTO_ID_BUXORO_2",
+        "PHOTO_ID_BUXORO_3",
+    ],
+    "Farg‘ona": [
+        "PHOTO_ID_FARGONA_1",
+        "PHOTO_ID_FARGONA_2",
+        "PHOTO_ID_FARGONA_3",
+    ],
+    "Andijon": [
+        "PHOTO_ID_ANDIJON_1",
+        "PHOTO_ID_ANDIJON_2",
+        "PHOTO_ID_ANDIJON_3",
+    ],
+    "Namangan": [
+        "PHOTO_ID_NAMANGAN_1",
+        "PHOTO_ID_NAMANGAN_2",
+        "PHOTO_ID_NAMANGAN_3",
+    ],
+    "Qashqadaryo": [
+        "PHOTO_ID_QASHQADARYO_1",
+        "PHOTO_ID_QASHQADARYO_2",
+        "PHOTO_ID_QASHQADARYO_3",
+    ],
+    "Surxondaryo": [
+        "PHOTO_ID_SURXONDARYO_1",
+        "PHOTO_ID_SURXONDARYO_2",
+        "PHOTO_ID_SURXONDARYO_3",
+    ],
+    "Navoiy": [
+        "PHOTO_ID_NAVOIY_1",
+        "PHOTO_ID_NAVOIY_2",
+        "PHOTO_ID_NAVOIY_3",
+    ],
+    "Sirdaryo": [
+        "PHOTO_ID_SIRDARYO_1",
+        "PHOTO_ID_SIRDARYO_2",
+        "PHOTO_ID_SIRDARYO_3",
+    ],
+    "Jizzax": [
+        "PHOTO_ID_JIZZAX_1",
+        "PHOTO_ID_JIZZAX_2",
+        "PHOTO_ID_JIZZAX_3",
+    ],
+    "Xorazm": [
+        "PHOTO_ID_XORAZM_1",
+        "PHOTO_ID_XORAZM_2",
+        "PHOTO_ID_XORAZM_3",
+    ],
 }
 
 region_texts = {
-    "Toshkent": {
-        "1": "1-variant matni",
-        "2": "2-variant matni",
-        "3": "3-variant matni",
-    }
+    "Toshkent": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Samarqand": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Buxoro": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Farg‘ona": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Andijon": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Namangan": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Qashqadaryo": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Surxondaryo": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Navoiy": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Sirdaryo": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Jizzax": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
+    "Xorazm": {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"},
 }
 
 confirm_texts = {
-    "Toshkent": {
-        "1": "✅ Қабул қилинди.",
-        "2": "✅ Қабул қилинди.",
-        "3": "✅ Қабул қилинди.",
-    }
+    "Toshkent": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Samarqand": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Buxoro": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Farg‘ona": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Andijon": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Namangan": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Qashqadaryo": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Surxondaryo": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Navoiy": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Sirdaryo": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Jizzax": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
+    "Xorazm": {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"},
 }
 
 user_region = {}
@@ -124,10 +182,9 @@ async def region_handler(message: Message):
 
     if photos:
         for photo in photos:
-            await message.answer_photo(
-                photo=photo,
-                caption=common_text
-            )
+            await message.answer_photo(photo=photo, caption=common_text)
+    else:
+        await message.answer("Бу вилоят учун ҳозирча расм қўйилмаган.")
 
     await message.answer("👇 Керакли вариантни танланг:", reply_markup=variant_keyboard())
 
@@ -153,7 +210,7 @@ async def confirm_handler(message: Message):
         await message.answer("Аввал вилоят ва вариантни танланг.", reply_markup=region_keyboard())
         return
 
-    text = confirm_texts.get(region, {}).get(variant, "✅ Қабул қилинди.")
+    text = confirm_texts.get(region, {}).get(variant, "❌XATOLIK❌")
     await message.answer(text, reply_markup=confirm_keyboard())
 
 @dp.message(F.text == "⬅️ Orqaga")
