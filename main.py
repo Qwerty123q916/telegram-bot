@@ -95,18 +95,66 @@ region_photos = {
 }
 
 region_texts = {
-    "Toshkent": {"1": common_text, "2": common_text, "3": common_text},
-    "Samarqand": {"1": common_text, "2": common_text, "3": common_text},
-    "Buxoro": {"1": common_text, "2": common_text, "3": common_text},
-    "Farg‘ona": {"1": common_text, "2": common_text, "3": common_text},
-    "Andijon": {"1": common_text, "2": common_text, "3": common_text},
-    "Namangan": {"1": common_text, "2": common_text, "3": common_text},
-    "Qashqadaryo": {"1": common_text, "2": common_text, "3": common_text},
-    "Surxondaryo": {"1": common_text, "2": common_text, "3": common_text},
-    "Navoiy": {"1": common_text, "2": common_text, "3": common_text},
-    "Sirdaryo": {"1": common_text, "2": common_text, "3": common_text},
-    "Jizzax": {"1": common_text, "2": common_text, "3": common_text},
-    "Xorazm": {"1": common_text, "2": common_text, "3": common_text},
+    "Toshkent": {
+        "1": "Toshkent 1-variant matni",
+        "2": "Toshkent 2-variant matni",
+        "3": "Toshkent 3-variant matni",
+    },
+    "Samarqand": {
+        "1": "Samarqand 1-variant matni",
+        "2": "Samarqand 2-variant matni",
+        "3": "Samarqand 3-variant matni",
+    },
+    "Buxoro": {
+        "1": "Buxoro 1-variant matni",
+        "2": "Buxoro 2-variant matni",
+        "3": "Buxoro 3-variant matni",
+    },
+    "Farg‘ona": {
+        "1": "Farg‘ona 1-variant matni",
+        "2": "Farg‘ona 2-variant matni",
+        "3": "Farg‘ona 3-variant matni",
+    },
+    "Andijon": {
+        "1": "Andijon 1-variant matni",
+        "2": "Andijon 2-variant matni",
+        "3": "Andijon 3-variant matni",
+    },
+    "Namangan": {
+        "1": "Namangan 1-variant matni",
+        "2": "Namangan 2-variant matni",
+        "3": "Namangan 3-variant matni",
+    },
+    "Qashqadaryo": {
+        "1": "Qashqadaryo 1-variant matni",
+        "2": "Qashqadaryo 2-variant matni",
+        "3": "Qashqadaryo 3-variant matni",
+    },
+    "Surxondaryo": {
+        "1": "Surxondaryo 1-variant matni",
+        "2": "Surxondaryo 2-variant matni",
+        "3": "Surxondaryo 3-variant matni",
+    },
+    "Navoiy": {
+        "1": "Navoiy 1-variant matni",
+        "2": "Navoiy 2-variant matni",
+        "3": "Navoiy 3-variant matni",
+    },
+    "Sirdaryo": {
+        "1": "Sirdaryo 1-variant matni",
+        "2": "Sirdaryo 2-variant matni",
+        "3": "Sirdaryo 3-variant matni",
+    },
+    "Jizzax": {
+        "1": "Jizzax 1-variant matni",
+        "2": "Jizzax 2-variant matni",
+        "3": "Jizzax 3-variant matni",
+    },
+    "Xorazm": {
+        "1": "Xorazm 1-variant matni",
+        "2": "Xorazm 2-variant matni",
+        "3": "Xorazm 3-variant matni",
+    },
 }
 
 confirm_texts = {
@@ -164,22 +212,27 @@ async def get_photo_id(message: Message):
 
 @dp.message(F.text == "/start")
 async def start_handler(message: Message):
+    user_region.pop(message.from_user.id, None)
+    user_variant.pop(message.from_user.id, None)
     await message.answer("📍 Вилоятни танланг:", reply_markup=region_keyboard())
 
 @dp.message(F.text.in_(regions))
 async def region_handler(message: Message):
     region = message.text
     user_region[message.from_user.id] = region
+    user_variant.pop(message.from_user.id, None)
 
     photos = region_photos.get(region, [])
-    texts = region_texts.get(region, {})
 
     if photos:
         for i, photo in enumerate(photos, start=1):
-            await message.answer_photo(
-                photo=photo,
-                caption=texts.get(str(i), common_text)
-            )
+            if i == 3:
+                await message.answer_photo(
+                    photo=photo,
+                    caption=common_text
+                )
+            else:
+                await message.answer_photo(photo=photo)
 
     await message.answer("👇 Керакли вариантни танланг:", reply_markup=variant_keyboard())
 
@@ -190,8 +243,10 @@ async def variant_handler(message: Message):
         await message.answer("Аввал вилоятни танланг.", reply_markup=region_keyboard())
         return
 
-    user_variant[message.from_user.id] = message.text
-    text = region_texts.get(region, {}).get(message.text, common_text)
+    variant = message.text
+    user_variant[message.from_user.id] = variant
+
+    text = region_texts.get(region, {}).get(variant, "Матн топилмади.")
     await message.answer(text, reply_markup=confirm_keyboard())
 
 @dp.message(F.text == "✅ O‘tkazdim")
@@ -208,6 +263,8 @@ async def confirm_handler(message: Message):
 
 @dp.message(F.text == "⬅️ Orqaga")
 async def back_handler(message: Message):
+    user_region.pop(message.from_user.id, None)
+    user_variant.pop(message.from_user.id, None)
     await message.answer("📍 Вилоятни танланг:", reply_markup=region_keyboard())
 
 async def main():
