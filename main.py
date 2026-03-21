@@ -4,6 +4,8 @@ from aiogram import Bot, Dispatcher, F
 from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
 
 TOKEN = os.getenv("TOKEN")
+if not TOKEN:
+    raise ValueError("TOKEN topilmadi. Railway Variables ga TOKEN qo‘shing.")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -37,61 +39,17 @@ region_photos = {
         "AgACAgIAAxkBAAIBrGm-Efnp9taM0Q42hf1DAuWBWfpfAAJyEWsbbw3wSbLvEH35KOTMAQADAgADeAADOgQ",
         "AgACAgIAAxkBAAIBq2m-EfnoBq_SJwQAAZzf3AsXYfTPxQACcRFrG28N8EkBNxAWKHNUKQEAAwIAA3gAAzoE",
     ],
-    "Samarqand": [
-        "PHOTO_ID_4",
-        "PHOTO_ID_5",
-        "PHOTO_ID_6",
-    ],
-    "Buxoro": [
-        "PHOTO_ID_7",
-        "PHOTO_ID_8",
-        "PHOTO_ID_9",
-    ],
-    "Farg‘ona": [
-        "PHOTO_ID_10",
-        "PHOTO_ID_11",
-        "PHOTO_ID_12",
-    ],
-    "Andijon": [
-        "PHOTO_ID_13",
-        "PHOTO_ID_14",
-        "PHOTO_ID_15",
-    ],
-    "Namangan": [
-        "PHOTO_ID_16",
-        "PHOTO_ID_17",
-        "PHOTO_ID_18",
-    ],
-    "Qashqadaryo": [
-        "PHOTO_ID_19",
-        "PHOTO_ID_20",
-        "PHOTO_ID_21",
-    ],
-    "Surxondaryo": [
-        "PHOTO_ID_22",
-        "PHOTO_ID_23",
-        "PHOTO_ID_24",
-    ],
-    "Navoiy": [
-        "PHOTO_ID_25",
-        "PHOTO_ID_26",
-        "PHOTO_ID_27",
-    ],
-    "Sirdaryo": [
-        "PHOTO_ID_28",
-        "PHOTO_ID_29",
-        "PHOTO_ID_30",
-    ],
-    "Jizzax": [
-        "PHOTO_ID_31",
-        "PHOTO_ID_32",
-        "PHOTO_ID_33",
-    ],
-    "Xorazm": [
-        "PHOTO_ID_34",
-        "PHOTO_ID_35",
-        "PHOTO_ID_36",
-    ],
+    "Samarqand": [],
+    "Buxoro": [],
+    "Farg‘ona": [],
+    "Andijon": [],
+    "Namangan": [],
+    "Qashqadaryo": [],
+    "Surxondaryo": [],
+    "Navoiy": [],
+    "Sirdaryo": [],
+    "Jizzax": [],
+    "Xorazm": [],
 }
 
 region_texts = {
@@ -99,33 +57,15 @@ region_texts = {
         "1": "✨ Бу ерга Тошкент учун 1-вариант матнини ёзинг",
         "2": "✨ Бу ерга Тошкент учун 2-вариант матнини ёзинг",
         "3": "🔥 Бу ерга Тошкент учун 3-вариант матнини ёзинг",
-    },
-    "Samarqand": {"1": common_text, "2": common_text, "3": common_text},
-    "Buxoro": {"1": common_text, "2": common_text, "3": common_text},
-    "Farg‘ona": {"1": common_text, "2": common_text, "3": common_text},
-    "Andijon": {"1": common_text, "2": common_text, "3": common_text},
-    "Namangan": {"1": common_text, "2": common_text, "3": common_text},
-    "Qashqadaryo": {"1": common_text, "2": common_text, "3": common_text},
-    "Surxondaryo": {"1": common_text, "2": common_text, "3": common_text},
-    "Navoiy": {"1": common_text, "2": common_text, "3": common_text},
-    "Sirdaryo": {"1": common_text, "2": common_text, "3": common_text},
-    "Jizzax": {"1": common_text, "2": common_text, "3": common_text},
-    "Xorazm": {"1": common_text, "2": common_text, "3": common_text},
+    }
 }
 
 confirm_texts = {
-    "Toshkent": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Samarqand": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Buxoro": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Farg‘ona": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Andijon": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Namangan": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Qashqadaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Surxondaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Navoiy": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Sirdaryo": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Jizzax": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
-    "Xorazm": {"1": "✅ Қабул қилинди.", "2": "✅ Қабул қилинди.", "3": "✅ Қабул қилинди."},
+    "Toshkent": {
+        "1": "✅ Қабул қилинди.",
+        "2": "✅ Қабул қилинди.",
+        "3": "✅ Қабул қилинди.",
+    }
 }
 
 user_region = {}
@@ -183,7 +123,10 @@ async def region_handler(message: Message):
     if photos:
         for i, photo in enumerate(photos, start=1):
             caption = region_texts.get(region, {}).get(str(i), common_text)
-            await message.answer_photo(photo=photo, caption=caption)
+            try:
+                await message.answer_photo(photo=photo, caption=caption)
+            except Exception as e:
+                await message.answer(f"{i}-rasm yuborilmadi: {e}")
 
     await message.answer("👇 Керакли вариантни танланг:", reply_markup=variant_keyboard())
 
