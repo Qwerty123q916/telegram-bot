@@ -212,17 +212,17 @@ region_texts = {
 
 ✅ Ushbu variant bo‘yicha asosiy ma’lumotlar taqdim etiladi.
 📩 Tanlovingiz qabul qilindi.
-🔔 Keyingi bosqich uchun tasdiqlashingiz mumkin.""",
+🔔 Davom etish uchun shu profilga yozing @user.""",
         "2": f"""📍 {r} — 2-variant
 
 ✅ Siz 2-variantni tanladingiz.
 📋 Ushbu yo‘nalish bo‘yicha alohida ma’lumot mavjud.
-🔔 Davom etish uchun tasdiqlash tugmasidan foydalaning.""",
+🔔 Davom etish uchun shu profilga yozing @user.""",
         "3": f"""📍 {r} — 3-variant
 
 ✅ Siz 3-variantni tanladingiz.
 📸 Tanlangan bo‘lim bo‘yicha ma’lumot tayyor.
-🔔 Davom etish uchun tasdiqlash tugmasini bosing."""
+🔔 Davom etish uchun shu profilga yozing @user."""
     }
     for r in regions
 }
