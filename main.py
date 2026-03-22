@@ -2,7 +2,14 @@ import asyncio
 import os
 import json
 from aiogram import Bot, Dispatcher, F
-from aiogram.types import Message, ReplyKeyboardMarkup, KeyboardButton
+from aiogram.types import (
+    Message,
+    ReplyKeyboardMarkup,
+    KeyboardButton,
+    ReplyKeyboardRemove,
+)
+from aiogram.exceptions import TelegramBadRequest
+
 
 TOKEN = os.getenv("TOKEN")
 if not TOKEN:
@@ -11,8 +18,16 @@ if not TOKEN:
 ADMIN_ID = 7890489981
 DATA_FILE = "users_data.json"
 
+bot = Bot(token=TOKEN)
+dp = Dispatcher()
+
+
+# =========================
+# DATA
+# =========================
 def is_admin(user_id: int) -> bool:
     return user_id == ADMIN_ID
+
 
 def load_data():
     if not os.path.exists(DATA_FILE):
@@ -20,9 +35,11 @@ def load_data():
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
+
 def save_data(data):
     with open(DATA_FILE, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
 
 def save_user(user):
     data = load_data()
@@ -30,9 +47,10 @@ def save_user(user):
     data["users"][uid] = {
         "id": user.id,
         "full_name": user.full_name,
-        "username": user.username
+        "username": user.username,
     }
     save_data(data)
+
 
 def save_choice(user, region, variant):
     data = load_data()
@@ -41,37 +59,66 @@ def save_choice(user, region, variant):
         "full_name": user.full_name,
         "username": user.username,
         "region": region,
-        "variant": variant
+        "variant": variant,
     })
     save_data(data)
 
-bot = Bot(token=TOKEN)
-dp = Dispatcher()
 
+# =========================
+# CONTENT
+# =========================
 regions = [
     "Toshkent", "Samarqand", "Buxoro", "Farg‘ona",
     "Andijon", "Namangan", "Qashqadaryo", "Surxondaryo",
     "Navoiy", "Sirdaryo", "Jizzax", "Xorazm"
 ]
 
-common_text = """🌟 Шаҳардаги ишончли ва қулай хизматлардан бири
+common_text = """🌟 Shahardagi ishonchli va qulay xizmatlardan biri
 
-📸 ФОТОЛАР РЕАЛ
+📸 Fotolar real
 
-📋 Хизмат турлари:
-1) Классик
-2) Релакс
-3) Соғломлаштирувчи
-4) Спорт
-5) Микс 2/1
-6) Микс 3/1
-7) Микс 4/1
-8) Умумий
-9) Универсал
+📋 Xizmat turlari:
+1) Klassik
+2) Relaks
+3) Sog‘lomlashtiruvchi
 
-🗣 Тиллар: Русский, туркча, қозоқча
+🗣 Tillar: Русский, turkcha, qozoqcha
 
-✅ Тўғри танлов қилинг!"""
+✅ To‘g‘ri tanlov qiling!"""
+
+SERVICES_TEXT = """📋 Xizmatlar
+
+✅ Klassik
+✅ Relaks
+✅ Sog‘lomlashtiruvchi
+✅ Sport
+✅ Mix xizmatlar
+
+Kerakli viloyatni tanlab, variantni tanlashingiz mumkin."""
+
+PRICES_TEXT = """💰 Narxlar
+
+Narxlar viloyat va tanlangan variantga qarab farq qilishi mumkin.
+
+📍 Viloyatni tanlang
+🔢 Variantni tanlang
+📩 Keyin sizga mos ma’lumot chiqadi"""
+
+CONTACT_TEXT = """📞 Bog‘lanish
+
+Admin: @username_yoki_raqam
+Ish vaqti: 24/7
+
+Qo‘shimcha ma’lumot uchun yozing."""
+
+ABOUT_TEXT = """ℹ️ Biz haqimizda
+
+Sizga qulay va tartibli ma’lumot berish uchun ushbu bot ishlab chiqilgan.
+
+📍 Viloyat tanlash
+📸 Rasmlar ko‘rish
+🔢 Variant tanlash
+📩 Kerakli ma’lumotni olish"""
 
 region_photos = {
     "Toshkent": [
@@ -136,20 +183,49 @@ region_photos = {
     ],
 }
 
-region_texts = {r: {"1": "1-variant matni", "2": "2-variant matni", "3": "3-variant matni"} for r in regions}
-confirm_texts = {r: {"1": "❌XATOLIK❌", "2": "❌XATOLIK❌", "3": "❌XATOLIK❌"} for r in regions}
+# Har viloyat uchun variantlar
+# keyin xohlasang 4,5,6 ham qo‘shish oson
+region_texts = {
+    r: {
+        "1": f"{r} uchun 1-variant matni",
+        "2": f"{r} uchun 2-variant matni",
+        "3": f"{r} uchun 3-variant matni",
+    }
+    for r in regions
+}
 
+confirm_texts = {
+    r: {
+        "1": f"✅ {r} / 1-variant bo‘yicha qayd qilindi",
+        "2": f"✅ {r} / 2-variant bo‘yicha qayd qilindi",
+        "3": f"✅ {r} / 3-variant bo‘yicha qayd qilindi",
+    }
+    for r in regions
+}
+
+
+# =========================
+# STATES
+# =========================
 user_region = {}
 user_variant = {}
 waiting_for_broadcast = set()
 
+
+# =========================
+# KEYBOARDS
+# =========================
 def start_keyboard():
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="📍 Viloyatni tanlash")]
-        ],
-        resize_keyboard=True
-    )
+    rows = [
+        [KeyboardButton(text="📍 Viloyatlar")],
+        [KeyboardButton(text="📋 Xizmatlar"), KeyboardButton(text="💰 Narxlar")],
+        [KeyboardButton(text="📞 Bog‘lanish"), KeyboardButton(text="ℹ️ Biz haqimizda")],
+    ]
+    if ADMIN_ID:
+        rows.append([KeyboardButton(text="/admin")])
+
+    return ReplyKeyboardMarkup(keyboard=rows, resize_keyboard=True)
+
 
 def region_keyboard():
     return ReplyKeyboardMarkup(
@@ -160,19 +236,22 @@ def region_keyboard():
             [KeyboardButton(text="Qashqadaryo"), KeyboardButton(text="Surxondaryo")],
             [KeyboardButton(text="Navoiy"), KeyboardButton(text="Sirdaryo")],
             [KeyboardButton(text="Jizzax"), KeyboardButton(text="Xorazm")],
-            [KeyboardButton(text="🏠 Bosh menyu")],
-        ],
-        resize_keyboard=True
-    )
-
-def variant_keyboard():
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="1"), KeyboardButton(text="2"), KeyboardButton(text="3"),],
             [KeyboardButton(text="⬅️ Orqaga"), KeyboardButton(text="🏠 Bosh menyu")],
         ],
         resize_keyboard=True
     )
+
+
+def variant_keyboard(region: str):
+    # Shu joyda regionga qarab variantlar sonini ko‘paytirish ham mumkin
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [KeyboardButton(text="1"), KeyboardButton(text="2"), KeyboardButton(text="3")],
+            [KeyboardButton(text="⬅️ Orqaga"), KeyboardButton(text="🏠 Bosh menyu")],
+        ],
+        resize_keyboard=True
+    )
+
 
 def confirm_keyboard():
     return ReplyKeyboardMarkup(
@@ -182,6 +261,7 @@ def confirm_keyboard():
         ],
         resize_keyboard=True
     )
+
 
 def admin_keyboard():
     return ReplyKeyboardMarkup(
@@ -193,28 +273,81 @@ def admin_keyboard():
         resize_keyboard=True
     )
 
+
+# =========================
+# HELPERS
+# =========================
+async def send_region_photos(message: Message, region: str):
+    photos = region_photos.get(region, [])
+    if not photos:
+        await message.answer("Bu viloyat uchun hozircha rasmlar qo‘shilmagan.")
+        return
+
+    for i, photo in enumerate(photos):
+        caption = common_text if i == 0 else None
+        try:
+            await message.answer_photo(photo=photo, caption=caption)
+        except TelegramBadRequest:
+            await message.answer("Rasmlardan birini yuborishda xatolik bo‘ldi.")
+
+
+def reset_user_state(user_id: int):
+    user_region.pop(user_id, None)
+    user_variant.pop(user_id, None)
+
+
+# =========================
+# HANDLERS
+# =========================
 @dp.message(F.photo)
 async def get_photo_id(message: Message):
     if not is_admin(message.from_user.id):
         return
     await message.answer(f"PHOTO_ID:\n{message.photo[-1].file_id}")
 
+
 @dp.message(F.text == "/start")
 async def start_handler(message: Message):
     save_user(message.from_user)
-    user_region.pop(message.from_user.id, None)
-    user_variant.pop(message.from_user.id, None)
-    await message.answer("Xush kelibsiz", reply_markup=start_keyboard())
+    reset_user_state(message.from_user.id)
+    await message.answer(
+        "Xush kelibsiz 👋\nKerakli bo‘limni tanlang:",
+        reply_markup=start_keyboard()
+    )
 
-@dp.message(F.text == "📍 Viloyatni tanlash")
-async def choose_region_handler(message: Message):
-    await message.answer("📍 Viloyatni tanlang:", reply_markup=region_keyboard())
 
 @dp.message(F.text == "/admin")
 async def admin_panel(message: Message):
     if not is_admin(message.from_user.id):
         return
-    await message.answer("Admin panel", reply_markup=admin_keyboard())
+    await message.answer("Admin panelga xush kelibsiz.", reply_markup=admin_keyboard())
+
+
+@dp.message(F.text == "📍 Viloyatlar")
+async def choose_region_handler(message: Message):
+    reset_user_state(message.from_user.id)
+    await message.answer("📍 Viloyatni tanlang:", reply_markup=region_keyboard())
+
+
+@dp.message(F.text == "📋 Xizmatlar")
+async def services_handler(message: Message):
+    await message.answer(SERVICES_TEXT, reply_markup=start_keyboard())
+
+
+@dp.message(F.text == "💰 Narxlar")
+async def prices_handler(message: Message):
+    await message.answer(PRICES_TEXT, reply_markup=start_keyboard())
+
+
+@dp.message(F.text == "📞 Bog‘lanish")
+async def contact_handler(message: Message):
+    await message.answer(CONTACT_TEXT, reply_markup=start_keyboard())
+
+
+@dp.message(F.text == "ℹ️ Biz haqimizda")
+async def about_handler(message: Message):
+    await message.answer(ABOUT_TEXT, reply_markup=start_keyboard())
+
 
 @dp.message(F.text == "📊 Statistika")
 async def stats_handler(message: Message):
@@ -226,27 +359,35 @@ async def stats_handler(message: Message):
     await message.answer(
         f"📊 Statistika\n\n"
         f"👥 Foydalanuvchilar: {total_users}\n"
-        f"📨 Tanlovlar soni: {total_choices}"
+        f"📝 Tanlovlar soni: {total_choices}",
+        reply_markup=admin_keyboard()
     )
+
 
 @dp.message(F.text == "👥 Foydalanuvchilar soni")
 async def users_count_handler(message: Message):
     if not is_admin(message.from_user.id):
         return
     data = load_data()
-    await message.answer(f"👥 Jami foydalanuvchilar: {len(data['users'])}")
+    await message.answer(
+        f"👥 Jami foydalanuvchilar: {len(data['users'])}",
+        reply_markup=admin_keyboard()
+    )
+
 
 @dp.message(F.text == "📨 Oxirgi tanlovlar")
 async def last_choices_handler(message: Message):
     if not is_admin(message.from_user.id):
         return
+
     data = load_data()
     choices = data["choices"][-10:]
+
     if not choices:
-        await message.answer("Hali tanlovlar yo‘q.")
+        await message.answer("Hali tanlovlar yo‘q.", reply_markup=admin_keyboard())
         return
 
-    text = "📨 Oxirgi tanlovlar:\n\n"
+    text = "📨 Oxirgi 10 ta tanlov:\n\n"
     for c in reversed(choices):
         username = f"@{c['username']}" if c["username"] else "username yo‘q"
         text += (
@@ -254,88 +395,118 @@ async def last_choices_handler(message: Message):
             f"🆔 {c['id']}\n"
             f"📍 {c['region']} | 🔢 {c['variant']}\n\n"
         )
-    await message.answer(text)
+
+    await message.answer(text, reply_markup=admin_keyboard())
+
 
 @dp.message(F.text == "📢 Xabar yuborish")
 async def broadcast_start(message: Message):
     if not is_admin(message.from_user.id):
         return
     waiting_for_broadcast.add(message.from_user.id)
-    await message.answer("Yuboriladigan xabarni kiriting:")
+    await message.answer("Yuboriladigan xabarni yuboring:", reply_markup=ReplyKeyboardRemove())
+
 
 @dp.message(F.text == "🏠 Bosh menyu")
 async def home_handler(message: Message):
-    user_region.pop(message.from_user.id, None)
-    user_variant.pop(message.from_user.id, None)
-    if is_admin(message.from_user.id):
-        await message.answer("🏠 Bosh menyu", reply_markup=start_keyboard())
-    else:
-        await message.answer("🏠 Bosh menyu", reply_markup=start_keyboard())
+    reset_user_state(message.from_user.id)
+    if message.from_user.id in waiting_for_broadcast:
+        waiting_for_broadcast.remove(message.from_user.id)
+    await message.answer("🏠 Bosh menyuga qaytdingiz.", reply_markup=start_keyboard())
+
+
+@dp.message(F.text == "⬅️ Orqaga")
+async def back_handler(message: Message):
+    user_id = message.from_user.id
+
+    # variant tanlagan bo‘lsa, region tanlashga qaytadi
+    if user_id in user_variant:
+        user_variant.pop(user_id, None)
+        await message.answer("📍 Viloyatni qayta tanlang:", reply_markup=region_keyboard())
+        return
+
+    # region tanlagan bo‘lsa, bosh menyuga qaytadi
+    if user_id in user_region:
+        user_region.pop(user_id, None)
+        await message.answer("🏠 Bosh menyuga qaytdingiz.", reply_markup=start_keyboard())
+        return
+
+    await message.answer("🏠 Bosh menyu", reply_markup=start_keyboard())
+
 
 @dp.message()
 async def universal_handler(message: Message):
     save_user(message.from_user)
+    user_id = message.from_user.id
+    text = message.text.strip() if message.text else ""
 
-    if is_admin(message.from_user.id) and message.from_user.id in waiting_for_broadcast:
-        waiting_for_broadcast.remove(message.from_user.id)
+    # Broadcast mode
+    if is_admin(user_id) and user_id in waiting_for_broadcast:
+        waiting_for_broadcast.remove(user_id)
         data = load_data()
         sent = 0
+
         for uid in data["users"]:
             try:
-                await bot.send_message(int(uid), message.text)
+                await bot.send_message(int(uid), text)
                 sent += 1
-            except:
+            except Exception:
                 pass
-        await message.answer(f"✅ Xabar yuborildi: {sent} ta userga", reply_markup=admin_keyboard())
+
+        await message.answer(
+            f"✅ Xabar yuborildi: {sent} ta foydalanuvchiga",
+            reply_markup=admin_keyboard()
+        )
         return
 
-    if message.text in regions:
-        region = message.text
-        user_region[message.from_user.id] = region
-        user_variant.pop(message.from_user.id, None)
+    # Region tanlash
+    if text in regions:
+        region = text
+        user_region[user_id] = region
+        user_variant.pop(user_id, None)
 
-        photos = region_photos.get(region, [])
-        if photos:
-            for photo in photos:
-                await message.answer_photo(photo=photo, caption=common_text)
-
-        await message.answer("👇 Kerakli variantni tanlang:", reply_markup=variant_keyboard())
+        await message.answer(f"📍 Siz tanlagan viloyat: {region}")
+        await send_region_photos(message, region)
+        await message.answer("👇 Kerakli variantni tanlang:", reply_markup=variant_keyboard(region))
         return
 
-    if message.text in ["1", "2", "3"]:
-        region = user_region.get(message.from_user.id)
+    # Variant tanlash
+    if text in ["1", "2", "3"]:
+        region = user_region.get(user_id)
+
         if not region:
             await message.answer("Avval viloyatni tanlang.", reply_markup=region_keyboard())
             return
 
-        variant = message.text
-        user_variant[message.from_user.id] = variant
-        save_choice(message.from_user, region, variant)
+        user_variant[user_id] = text
+        save_choice(message.from_user, region, text)
 
-        text = region_texts.get(region, {}).get(variant, "Matn topilmadi.")
-        await message.answer(text, reply_markup=confirm_keyboard())
+        result_text = region_texts.get(region, {}).get(text, "Matn topilmadi.")
+        await message.answer(result_text, reply_markup=confirm_keyboard())
         return
 
-    if message.text == "✅ O‘tkazdim":
-        region = user_region.get(message.from_user.id)
-        variant = user_variant.get(message.from_user.id)
+    # Confirm
+    if text == "✅ O‘tkazdim":
+        region = user_region.get(user_id)
+        variant = user_variant.get(user_id)
 
         if not region or not variant:
             await message.answer("Avval viloyat va variantni tanlang.", reply_markup=region_keyboard())
             return
 
-        text = confirm_texts.get(region, {}).get(variant, "❌XATOLIK❌")
-        await message.answer(text, reply_markup=confirm_keyboard())
+        result_text = confirm_texts.get(region, {}).get(variant, "❌ Xatolik")
+        await message.answer(result_text, reply_markup=confirm_keyboard())
         return
 
-    if message.text == "⬅️ Orqaga":
-        user_region.pop(message.from_user.id, None)
-        user_variant.pop(message.from_user.id, None)
-        await message.answer("📍 Viloyatni tanlang:", reply_markup=region_keyboard())
-        return
+    await message.answer(
+        "Kerakli tugmalardan birini tanlang.",
+        reply_markup=start_keyboard()
+    )
+
 
 async def main():
     await dp.start_polling(bot)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
