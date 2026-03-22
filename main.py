@@ -229,9 +229,9 @@ region_texts = {
 
 confirm_texts = {
     r: {
-        "1": f"✅ {r} / 1-variant bo‘yicha tanlov qayd qilindi.",
-        "2": f"✅ {r} / 2-variant bo‘yicha tanlov qayd qilindi.",
-        "3": f"✅ {r} / 3-variant bo‘yicha tanlov qayd qilindi."
+        "1": f"❌ {r} / XATOLIK.",
+        "2": f"❌ {r} / XATOLIK.",
+        "3": f"❌ {r} / XATOLIK."
     }
     for r in regions
 }
